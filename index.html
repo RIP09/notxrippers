@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+         <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOTxRIPPERS | Esports Official</title>
+    <title>NOTxRIPPERS | Professional Esports Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#00f2ff', // Cyber Blue
-                        secondary: '#7000ff', // Electric Purple
-                        accent: '#ff0055', // Kill-streak Red
-                        dark: '#050505',
-                        surface: '#121212'
+                        primary: '#00D1FF', // Electric Cyan
+                        secondary: '#9D00FF', // Deep Purple
+                        accent: '#FF0055', // Action Pink
+                        dark: '#030303',
+                        panel: 'rgba(20, 20, 20, 0.8)'
                     },
                     fontFamily: {
-                        heading: ['Rajdhani', 'sans-serif'],
-                        body: ['Space Grotesk', 'sans-serif'],
+                        heading: ['Orbitron', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
                     }
                 }
             }
@@ -28,118 +28,135 @@
     </script>
 
     <style>
-        body { background-color: #050505; font-family: 'Space Grotesk', sans-serif; color: white; }
-        .glow-text { text-shadow: 0 0 15px rgba(0, 242, 255, 0.5); }
-        .roster-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .roster-card:hover { transform: translateY(-10px) scale(1.02); }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00f2ff; }
+        body { background: #030303; color: white; scroll-behavior: smooth; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .neon-border:hover { border-color: #00D1FF; box-shadow: 0 0 15px rgba(0, 209, 255, 0.4); }
+        .gradient-text { background: linear-gradient(90deg, #00D1FF, #9D00FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-mesh { background-image: radial-gradient(circle at 20% 30%, rgba(157, 0, 255, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(0, 209, 255, 0.1) 0%, transparent 40%); }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="font-body overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center glass">
-        <div class="text-2xl font-bold font-heading tracking-tighter text-white">
-            NOTX<span class="text-primary italic">RIPPERS</span>
+    <nav class="fixed w-full z-[100] px-8 py-5 flex justify-between items-center glass-panel">
+        <div class="flex items-center gap-4">
+            <img id="main-logo" src="" alt="NxR" class="h-10 w-auto rounded-md shadow-lg hidden">
+            <span class="text-2xl font-heading font-bold tracking-widest uppercase">NOTX<span class="text-primary">RIPPERS</span></span>
         </div>
-        <div class="hidden md:flex space-x-8 text-sm font-bold uppercase tracking-widest">
-            <a href="#home" class="hover:text-primary transition">Home</a>
-            <a href="#roster" class="hover:text-primary transition">Roster</a>
-            <a href="#matches" class="hover:text-primary transition">Schedule</a>
-            <a href="#" class="bg-primary text-black px-4 py-1 rounded-sm hover:bg-white transition">Store</a>
+        <div class="hidden lg:flex space-x-10 text-xs font-bold uppercase tracking-[0.2em]">
+            <a href="#home" class="hover:text-primary transition-all">Hub</a>
+            <a href="#roster" class="hover:text-primary transition-all">Lineup</a>
+            <a href="#matches" class="hover:text-primary transition-all">War Room</a>
+            <a href="#sponsors" class="hover:text-primary transition-all">Partners</a>
         </div>
+        <button class="bg-primary hover:bg-white text-black font-extrabold px-6 py-2 text-xs uppercase transition-all duration-300">Join Org</button>
     </nav>
 
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary/20 via-dark to-dark"></div>
+    <section id="home" class="relative min-h-screen flex items-center justify-center hero-mesh pt-20">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
         
-        <div class="relative z-10 text-center px-4">
-            <h1 class="text-7xl md:text-9xl font-bold font-heading uppercase leading-none mb-4 glow-text">
-                WE ARE <br><span class="text-primary italic">THE RIPPERS</span>
+        <div class="relative z-10 text-center max-w-5xl px-6">
+            <div class="inline-block px-4 py-1 border border-primary/30 rounded-full text-primary text-[10px] font-bold uppercase tracking-widest mb-6">Established 2026</div>
+            <h1 class="text-6xl md:text-9xl font-heading font-bold leading-tight mb-8 uppercase italic">
+                RIPPING THE <br><span class="gradient-text">ARENA APART</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-xl tracking-widest uppercase mb-8">Dominating the digital arena since 2024</p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#roster" class="border border-primary text-primary px-10 py-4 font-bold hover:bg-primary hover:text-black transition">VIEW ROSTER</a>
-                <a href="https://discord.gg/yourlink" class="bg-white text-black px-10 py-4 font-bold hover:bg-primary transition">JOIN DISCORD</a>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#roster" class="bg-white text-black px-12 py-4 font-extrabold hover:bg-primary transition-all uppercase text-sm">Meet the Squad</a>
+                <a href="#matches" class="border border-white/20 hover:border-primary px-12 py-4 font-bold transition-all uppercase text-sm glass-panel">Match Results</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 px-6">
+        <div class="max-w-7xl mx-auto glass-panel p-1 rounded-xl overflow-hidden">
+            <div class="bg-dark/50 p-4 border-b border-white/5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 bg-red-600 rounded-full animate-pulse"></span>
+                    <span class="text-xs font-bold uppercase tracking-widest">Live Broadcast</span>
+                </div>
+                <p class="text-[10px] text-gray-500 uppercase">Twitch.tv/NOTxRIPPERS</p>
+            </div>
+            <div class="aspect-video w-full bg-neutral-900 flex items-center justify-center">
+                <p class="text-gray-600 font-heading italic text-sm">Enter Twitch Channel Name in script to activate</p>
             </div>
         </div>
     </section>
 
     <section id="roster" class="py-24 px-6 max-w-7xl mx-auto">
-        <h2 class="text-5xl font-heading font-bold mb-12 border-l-4 border-primary pl-6 uppercase">Active Lineup</h2>
-        <div id="roster-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <h2 class="text-5xl font-heading font-bold uppercase tracking-tighter">Elite <span class="text-primary italic">Lineup</span></h2>
+                <p class="text-gray-500 mt-2">The world-class athletes representing NxR.</p>
+            </div>
+            <div class="flex gap-4">
+                <button class="text-xs font-bold px-4 py-2 border border-white/10 hover:border-primary transition uppercase">Valorant</button>
+                <button class="text-xs font-bold px-4 py-2 border border-white/10 hover:border-primary transition uppercase">CS2</button>
+            </div>
+        </div>
+        <div id="roster-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             </div>
     </section>
 
-    <section id="matches" class="py-24 px-6 bg-surface/50">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-5xl font-heading font-bold mb-12 text-center uppercase">Upcoming <span class="text-primary italic">Battles</span></h2>
-            <div id="match-container" class="space-y-4">
-                </div>
+    <section id="sponsors" class="py-20 border-y border-white/5 bg-panel">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.5em] mb-12 italic underline decoration-primary decoration-2 underline-offset-8">Global Partners</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-700 items-center">
+                <h3 class="font-heading text-xl">RAZER</h3>
+                <h3 class="font-heading text-xl">INTEL</h3>
+                <h3 class="font-heading text-xl">LOGITECH</h3>
+                <h3 class="font-heading text-xl">RED BULL</h3>
+            </div>
         </div>
     </section>
 
-    <footer class="py-12 border-t border-white/10 text-center">
-        <p class="text-gray-500 text-sm mb-4 uppercase tracking-widest">&copy; 2026 NOTxRIPPERS ESPORTS ORG</p>
-        <div class="flex justify-center space-x-6">
-            <a href="#" class="text-xl hover:text-primary">TWITCH</a>
-            <a href="#" class="text-xl hover:text-primary">X / TWITTER</a>
-            <a href="#" class="text-xl hover:text-primary">YOUTUBE</a>
+    <footer class="py-16 px-8 bg-dark text-center border-t border-white/5">
+        <div class="mb-8 font-heading text-xl tracking-widest">NOTX<span class="text-primary italic">RIPPERS</span></div>
+        <div class="flex justify-center gap-8 mb-8 text-gray-500 text-xs font-bold uppercase tracking-widest">
+            <a href="#" class="hover:text-primary">X / Twitter</a>
+            <a href="#" class="hover:text-primary">Discord</a>
+            <a href="#" class="hover:text-primary">Youtube</a>
         </div>
+        <p class="text-[10px] text-gray-700 uppercase tracking-widest italic">&copy; 2026 NOTxRIPPERS - Built for the Elite</p>
     </footer>
 
     <script>
-        const ROSTER = [
-            { name: 'VENOM', realName: 'Arjun Mehta', role: 'Entry Fragger', game: 'VALORANT', color: '#00f2ff' },
-            { name: 'GHOST', realName: 'Liam Smith', role: 'AWP / Sniper', game: 'CS2', color: '#ff0055' },
-            { name: 'STRIKER', realName: 'Kenji Sato', role: 'Support', game: 'VALORANT', color: '#00f2ff' },
-            { name: 'PHOENIX', realName: 'Sarah J.', role: 'IGL', game: 'APEX LEGENDS', color: '#7000ff' }
+        // ---------------------------------------------------------
+        // 1. ADD YOUR LOGO HERE: Paste the URL between the quotes
+        const LOGO_URL = ""; 
+        // ---------------------------------------------------------
+
+        const PLAYERS = [
+            { ign: 'VENOM', role: 'Duelist', country: 'IN', title: 'Valorant' },
+            { ign: 'GHOST', role: 'In-Game Leader', country: 'US', title: 'CS2' },
+            { ign: 'STRIKER', role: 'Support', country: 'KR', title: 'Valorant' },
+            { ign: 'ALPHA', role: 'Fragger', country: 'UK', title: 'Apex' }
         ];
 
-        const MATCHES = [
-            { opponent: 'TEAM LIQUID', game: 'VALORANT', time: 'Feb 25 - 18:00', type: 'Grand Finals' },
-            { opponent: 'NAVI', game: 'CS2', time: 'Feb 28 - 21:00', type: 'Pro League' }
-        ];
+        // Handle Logo Display
+        const logoImg = document.getElementById('main-logo');
+        if (LOGO_URL) {
+            logoImg.src = LOGO_URL;
+            logoImg.classList.remove('hidden');
+        }
 
-        // Populate Roster
-        const rosterContainer = document.getElementById('roster-container');
-        ROSTER.forEach(player => {
-            rosterContainer.innerHTML += `
-                <div class="roster-card glass p-1 relative overflow-hidden group">
-                    <div class="h-80 bg-gradient-to-t from-black to-gray-800 flex items-end p-6">
-                        <div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity bg-center bg-cover" style="background-image: url('https://via.placeholder.com/400x600')"></div>
-                        <div class="relative z-10">
-                            <span class="text-[10px] font-bold px-2 py-1 rounded" style="background: ${player.color}; color: black">${player.game}</span>
-                            <h3 class="text-3xl font-heading font-bold mt-2">${player.name}</h3>
-                            <p class="text-gray-400 text-xs uppercase tracking-tighter">${player.role} / ${player.realName}</p>
-                        </div>
+        // Handle Roster Influx
+        const grid = document.getElementById('roster-grid');
+        PLAYERS.forEach(p => {
+            grid.innerHTML += `
+                <div class="glass-panel p-2 neon-border border-transparent border transition-all duration-300 group cursor-pointer">
+                    <div class="h-96 bg-neutral-900 mb-4 overflow-hidden relative">
+                         <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent opacity-60"></div>
+                         <img src="https://via.placeholder.com/400x600?text=${p.ign}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                         <div class="absolute bottom-4 left-4">
+                            <span class="text-[10px] bg-primary text-black font-bold px-2 py-0.5 rounded uppercase">${p.title}</span>
+                         </div>
                     </div>
-                </div>
-            `;
-        });
-
-        // Populate Matches
-        const matchContainer = document.getElementById('match-container');
-        MATCHES.forEach(match => {
-            matchContainer.innerHTML += `
-                <div class="glass p-6 flex flex-col md:flex-row justify-between items-center hover:bg-white/5 transition">
-                    <div class="flex items-center gap-6 mb-4 md:mb-0">
-                        <div class="text-center">
-                            <p class="text-xs text-primary font-bold uppercase">${match.game}</p>
-                            <p class="text-xl font-heading font-bold">${match.time}</p>
-                        </div>
-                        <div class="text-2xl font-bold uppercase">NxR <span class="text-gray-500">VS</span> ${match.opponent}</div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-xs text-gray-500 uppercase mb-2">${match.type}</p>
-                        <button class="bg-transparent border border-white/20 px-6 py-2 text-xs font-bold hover:bg-white hover:text-black transition">SET REMINDER</button>
+                    <div class="p-4">
+                        <h4 class="text-2xl font-heading font-bold uppercase italic">${p.ign}</h4>
+                        <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">${p.role}</p>
                     </div>
                 </div>
             `;
         });
     </script>
 </body>
-</html>
+</html>                                   
