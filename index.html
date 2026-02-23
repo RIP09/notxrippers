@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOTxRIPPERS | Tactical Esports Portal</title>
+    <title>NOTxRIPPERS | Professional Esports Organization</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
@@ -33,97 +33,90 @@
         .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; }
         .skew-btn:hover { transform: skew(-10deg) scale(1.05); }
         .skew-btn span { transform: skew(10deg); display: inline-block; }
-        .btn-glow:hover { box-shadow: 0 0 20px rgba(0, 209, 255, 0.4); }
     </style>
 </head>
 <body class="font-body overflow-x-hidden">
 
     <script>
-        // BACKEND CONFIG
         const SUPABASE_URL = 'https://pnplwsvhxqxzwoweiyfh.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBucGx3c3ZoeHF4endvd2VpeWZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MjI3MTUsImV4cCI6MjA4NzM5ODcxNX0.JsnbizSjuk_06Ds6higCTACAf08TosaIZfMK5_hZQTk'; 
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         const DB = {
-            logo: "NxREsportsLogo.jpg", // UPDATED TO MATCH YOUR FILENAME
-            form: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true"
+            logo: "NxREsportsLogo.jpg",
+            form: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true",
+            staff: [
+                { name: "RIPPER", role: "FOUNDER & CEO", bio: "Visionary lead of NxR operations." },
+                { name: "VENOM", role: "CO-FOUNDER", bio: "Tactical head and roster management." },
+                { name: "GHOST", role: "CHIEF STRATEGIST", bio: "Overseeing competitive integrity." }
+            ]
         };
     </script>
 
-    <div id="success-overlay" class="fixed inset-0 z-[200] bg-dark/95 flex items-center justify-center hidden p-6">
-        <div class="glass p-12 text-center max-w-md border-primary border-t-4 shadow-2xl">
-            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span class="text-primary text-3xl font-bold">✓</span>
-            </div>
-            <h2 class="text-2xl font-heading font-bold mb-4 tracking-tighter uppercase italic">Authenticated</h2>
-            <p class="text-gray-400 text-sm mb-8 font-light">You have successfully signed up in Not x Rippers Website.</p>
-            <button onclick="document.getElementById('success-overlay').classList.add('hidden')" class="skew-btn bg-primary text-black px-10 py-3 font-black uppercase text-xs btn-glow"><span>Access Portal</span></button>
-        </div>
-    </div>
-
     <nav class="fixed w-full z-50 px-8 py-5 flex justify-between items-center glass border-b border-white/5">
         <div class="flex items-center gap-4">
-            <div class="relative">
-                <div class="absolute inset-0 bg-primary blur-md opacity-20"></div>
-                <img src="NxREsportsLogo.jpg" onerror="this.src='https://via.placeholder.com/50?text=NxR'" class="h-12 w-12 rounded-none border-r-2 border-primary object-cover relative z-10">
-            </div>
-            <span class="font-heading font-bold text-xl tracking-tighter uppercase italic neon-text">NOTX<span class="text-primary">RIPPERS</span></span>
+            <img src="NxREsportsLogo.jpg" onerror="this.src='https://via.placeholder.com/50?text=NxR'" class="h-10 w-10 border-r-2 border-primary object-cover">
+            <span class="font-heading font-bold text-lg tracking-tighter uppercase italic neon-text">NOTX<span class="text-primary">RIPPERS</span></span>
+        </div>
+        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+            <a href="#about" class="hover:text-primary transition">About</a>
+            <a href="#staff" class="hover:text-primary transition">Staff</a>
+            <a href="#join" class="hover:text-primary transition">Recruitment</a>
         </div>
         <div id="auth-ui" class="flex gap-4"></div>
     </nav>
 
-    <section class="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
-        <div class="relative z-10">
-            <div class="inline-block px-3 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">
-                Establish Dominance
+    <section class="h-screen flex flex-col items-center justify-center text-center px-4">
+        <div class="inline-block px-3 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">ESTD 2026</div>
+        <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter">RIP THE <span class="text-primary">ARENA</span></h1>
+        <div class="flex gap-6 mt-4">
+            <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase"><span>Join Organization</span></a>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">Introduction</h2>
+                <p class="text-gray-400 leading-loose text-lg font-light">
+                    Founded in 2026, <span class="text-white font-bold tracking-widest">NOTxRIPPERS (NxR)</span> is a elite esports infrastructure. We focus on mechanical precision, high-level strategy, and the professional growth of our athletes.
+                </p>
             </div>
-            <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter leading-none">
-                RIP THE <span class="text-primary">ARENA</span>
-            </h1>
-            <p class="text-gray-500 tracking-[0.6em] uppercase text-[10px] mb-12 max-w-2xl mx-auto italic">High-Performance Tactical Operations • Established 2026</p>
-            <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase btn-glow"><span>Apply for Recruitment</span></a>
-                <a href="#profile-section" id="hero-profile-btn" class="hidden skew-btn border border-white/10 px-12 py-5 font-black text-xs uppercase hover:bg-white/5 transition glass"><span>Go to Dashboard</span></a>
+            <div class="glass p-10 border-t-2 border-primary/50">
+                <h3 class="text-xl font-heading font-bold uppercase italic mb-6 text-primary">Mission & Vision</h3>
+                <p class="text-gray-500 text-sm mb-4 italic">"To define the next era of competitive dominance through discipline and technological edge."</p>
+                <p class="text-gray-400 text-sm leading-relaxed">Our mission is to cultivate an ecosystem where talent meets strategy, providing the resources necessary for undisputed victory.</p>
             </div>
         </div>
     </section>
 
-    <section id="profile-section" class="py-32 px-6 bg-panel border-y border-white/5 hidden">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center md:items-end gap-8 mb-16 border-b border-white/5 pb-12">
-                <div class="w-32 h-32 bg-gradient-to-br from-primary/20 to-transparent border-2 border-primary/30 flex items-center justify-center text-5xl skew-x-[-5deg]">👤</div>
-                <div class="text-center md:text-left">
-                    <div class="text-primary text-[10px] font-bold uppercase tracking-[0.5em] mb-2">Verified Athlete</div>
-                    <h2 class="text-5xl font-heading font-bold uppercase italic tracking-tighter">DATA <span class="text-primary">CORE</span></h2>
-                    <p id="profile-email" class="text-gray-500 text-sm tracking-widest mt-2 font-light opacity-60"></p>
+    <section id="staff" class="py-32 bg-panel border-y border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-heading font-bold uppercase italic mb-16 text-center">Leadership <span class="text-primary">Staff</span></h2>
+            <div id="staff-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass p-10 border-t-2 border-primary relative overflow-hidden">
-                    <h4 class="text-[10px] font-bold text-primary uppercase tracking-[0.3em] mb-4">Account Status</h4>
-                    <p class="text-2xl font-bold uppercase italic">Operational</p>
-                    <p class="text-gray-500 text-xs mt-4 leading-relaxed font-light">Credentials encrypted and synced with NxR secure server.</p>
-                </div>
-                <div class="glass p-10 border-t-2 border-white/10 relative overflow-hidden">
-                    <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-4">Internal Rank</h4>
-                    <p class="text-2xl font-bold uppercase italic text-gray-500">Pending Review</p>
-                    <p class="text-gray-500 text-xs mt-4 leading-relaxed font-light">Complete recruitment evaluation for placement.</p>
-                </div>
-            </div>
         </div>
     </section>
 
-    <section id="join" class="py-32 px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-6xl font-heading font-bold mb-4 uppercase italic tracking-tighter">JOIN THE <span class="text-primary">ELITE</span></h2>
-                <div class="w-24 h-1 bg-primary mx-auto"></div>
-            </div>
-            <div class="neon-border p-1 bg-dark shadow-2xl">
-                <iframe id="recruitment-form" src="" width="100%" height="900" frameborder="0"></iframe>
-            </div>
+    <section id="profile-section" class="py-32 px-6 hidden">
+        <div class="max-w-4xl mx-auto glass p-12 border-l-4 border-primary">
+            <h2 class="text-3xl font-heading font-bold uppercase italic mb-4 tracking-tighter">Access <span class="text-primary">Granted</span></h2>
+            <p id="profile-email" class="text-white font-bold tracking-widest uppercase text-sm mb-2"></p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-widest italic">NxR Verified Personnel</p>
         </div>
     </section>
+
+    <section id="join" class="py-32 px-6 max-w-5xl mx-auto">
+        <h2 class="text-4xl font-heading font-bold uppercase italic mb-12 text-center">Recruitment <span class="text-primary">Portal</span></h2>
+        <div class="neon-border p-1 bg-dark">
+            <iframe id="recruitment-form" src="" width="100%" height="900" frameborder="0"></iframe>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/5 text-center">
+        <div class="mb-6"><span class="font-heading font-bold text-sm tracking-tighter uppercase italic">NOTX<span class="text-primary">RIPPERS</span></span></div>
+        <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em]">Copyright &copy; 2026 NOTxRIPPERS. All Rights Reserved. ESTD 2026.</p>
+    </footer>
 
     <div id="auth-modal" class="fixed inset-0 z-[100] bg-dark/98 backdrop-blur-xl hidden flex items-center justify-center p-6">
         <div class="glass max-w-md w-full p-12 relative border border-white/10 text-center">
@@ -134,35 +127,34 @@
 
     <script>
         document.getElementById('recruitment-form').src = DB.form;
+        
+        // Staff Generator
+        const staffContainer = document.getElementById('staff-grid');
+        DB.staff.forEach(s => {
+            staffContainer.innerHTML += `
+                <div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition group">
+                    <div class="text-primary font-bold text-[10px] mb-2 tracking-[0.3em]">${s.role}</div>
+                    <h3 class="text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed italic">${s.bio}</p>
+                </div>`;
+        });
 
         async function init() {
             const { data: { session } } = await _supabase.auth.getSession();
-            const params = new URLSearchParams(window.location.search);
-            if (window.location.hash.includes('access_token') || params.get('type') === 'signup') {
-                document.getElementById('success-overlay').classList.remove('hidden');
-                window.history.replaceState(null, null, window.location.pathname);
-            }
             updateUI(session?.user);
         }
         init();
 
         function updateUI(user) {
             const authUI = document.getElementById('auth-ui');
-            const profileSection = document.getElementById('profile-section');
-            const heroBtn = document.getElementById('hero-profile-btn');
-            
+            const profileSec = document.getElementById('profile-section');
             if (user) {
-                authUI.innerHTML = `
-                    <button onclick="handleSignOut()" class="skew-btn border border-red-500 text-red-500 px-4 py-1 text-[10px] font-bold uppercase hover:bg-red-500 hover:text-white transition"><span>Sign Out</span></button>`;
-                profileSection.classList.remove('hidden');
-                heroBtn.classList.remove('hidden');
+                authUI.innerHTML = `<button onclick="handleSignOut()" class="skew-btn border border-red-500 text-red-500 px-4 py-1 text-[10px] font-bold uppercase hover:bg-red-500 hover:text-white transition"><span>Sign Out</span></button>`;
+                profileSec.classList.remove('hidden');
                 document.getElementById('profile-email').innerText = user.email;
             } else {
-                authUI.innerHTML = `
-                    <button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition mr-4">Login</button>
-                    <button onclick="toggleAuth('register')" class="skew-btn bg-primary text-black px-6 py-1 text-[10px] font-black uppercase btn-glow"><span>Register</span></button>`;
-                profileSection.classList.add('hidden');
-                heroBtn.classList.add('hidden');
+                authUI.innerHTML = `<button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition mr-4">Login</button><button onclick="toggleAuth('register')" class="skew-btn bg-primary text-black px-6 py-1 text-[10px] font-black uppercase"><span>Register</span></button>`;
+                profileSec.classList.add('hidden');
             }
         }
 
@@ -171,31 +163,25 @@
             const content = document.getElementById('auth-content');
             if(!mode) return modal.classList.add('hidden');
             modal.classList.remove('hidden');
-            const style = "w-full bg-white/5 border border-white/10 p-5 mb-5 text-sm outline-none focus:border-primary text-white";
-            
+            const style = "w-full bg-white/5 border border-white/10 p-5 mb-5 text-sm text-white outline-none focus:border-primary";
             if(mode === 'login') {
-                content.innerHTML = `<h2 class="text-3xl font-heading font-bold mb-8 italic uppercase tracking-tighter">ACCESS <span class="text-primary">LOG</span></h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="KEY" class="${style}"><button onclick="handleSignIn()" class="w-full bg-primary text-black py-5 font-black text-xs uppercase btn-glow">Initialize Session</button>`;
+                content.innerHTML = `<h2 class="text-2xl font-heading font-bold mb-8 uppercase italic">Login</h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="KEY" class="${style}"><button onclick="handleSignIn()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase">Initialize</button>`;
             } else {
-                content.innerHTML = `<h2 class="text-3xl font-heading font-bold mb-8 italic uppercase tracking-tighter">CREATE <span class="text-primary">ID</span></h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="PASSWORD" class="${style}"><button onclick="handleSignUp()" class="w-full bg-primary text-black py-5 font-black text-xs uppercase btn-glow">Establish Identity</button>`;
+                content.innerHTML = `<h2 class="text-2xl font-heading font-bold mb-8 uppercase italic">Register</h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="PASSWORD" class="${style}"><button onclick="handleSignUp()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase">Establish ID</button>`;
             }
         }
 
         async function handleSignUp() {
             const { error } = await _supabase.auth.signUp({ email: document.getElementById('email').value, password: document.getElementById('pass').value });
-            if (error) alert(error.message);
-            else { alert("ID Created. Check email for secure activation link."); toggleAuth(); }
+            if (error) alert(error.message); else { alert("Verification link sent to email."); toggleAuth(); }
         }
 
         async function handleSignIn() {
             const { data, error } = await _supabase.auth.signInWithPassword({ email: document.getElementById('email').value, password: document.getElementById('pass').value });
-            if (error) alert(error.message);
-            else { updateUI(data.user); toggleAuth(); }
+            if (error) alert(error.message); else { updateUI(data.user); toggleAuth(); }
         }
 
-        async function handleSignOut() {
-            await _supabase.auth.signOut();
-            window.location.reload();
-        }
+        async function handleSignOut() { await _supabase.auth.signOut(); window.location.reload(); }
     </script>
 </body>
 </html>
