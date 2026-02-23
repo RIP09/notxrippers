@@ -22,7 +22,7 @@
         body { background: #050505; color: white; scroll-behavior: smooth; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
         .neon-glow { text-shadow: 0 0 15px rgba(0, 209, 255, 0.4); }
-        input::placeholder { color: rgba(255,255,255,0.3); }
+        .hidden { display: none; }
     </style>
 </head>
 <body class="font-body">
@@ -35,7 +35,7 @@
 
         const DB = {
             orgName: "NOTxRIPPERS",
-            logoFile: "NxREsportsLogo.jpg",
+            logoFile: "NxREsportsLogo.jpg", // Updated to match your screenshot
             googleFormURL: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true",
             roster: [
                 { ign: "VENOM", role: "IGL", game: "VALORANT" },
@@ -46,29 +46,36 @@
 
     <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center glass">
         <div class="flex items-center gap-3">
-            <img src="20251202_072806.jpg" class="h-10 w-10 rounded-full border border-primary object-cover">
+            <img src="NxREsportsLogo.jpg" class="h-10 w-10 rounded-full border border-primary object-cover">
             <span class="font-heading font-bold text-xl tracking-tighter">NOTX<span class="text-primary">RIPPERS</span></span>
         </div>
-        <div id="nav-auth" class="flex gap-4 border-l border-white/10 pl-4">
-            <button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition">Login</button>
-            <button onclick="toggleAuth('register')" class="bg-primary text-black px-4 py-1 text-[10px] font-black uppercase rounded-sm">Register</button>
+        
+        <div class="flex items-center gap-4">
+            <div id="logged-out-nav" class="flex gap-4 border-l border-white/10 pl-4">
+                <button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition">Login</button>
+                <button onclick="toggleAuth('register')" class="bg-primary text-black px-4 py-1 text-[10px] font-black uppercase rounded-sm">Register</button>
+            </div>
+            <div id="logged-in-nav" class="hidden flex items-center gap-4 border-l border-white/10 pl-4">
+                <span id="user-display" class="text-primary text-[10px] font-bold uppercase tracking-widest"></span>
+                <button onclick="handleSignOut()" class="border border-red-500/50 text-red-500 px-3 py-1 text-[10px] font-bold uppercase hover:bg-red-500 hover:text-white transition">Sign Out</button>
+            </div>
         </div>
     </nav>
 
     <section class="h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
         <h1 class="text-6xl md:text-8xl font-heading font-bold italic neon-glow mb-4 uppercase">Ripping The Arena</h1>
-        <p class="text-gray-500 tracking-[0.4em] uppercase text-xs mb-10 italic">Unfunded • Ambitious • Elite</p>
-        <a href="#join" class="bg-white text-black px-10 py-4 font-black text-xs uppercase hover:bg-primary transition">Apply for Roster</a>
+        <p class="text-gray-400 tracking-[0.4em] uppercase text-xs mb-10 italic">Elite Performance • Professional Excellence</p>
+        <a href="#join" class="bg-primary text-black px-10 py-4 font-black text-xs uppercase hover:bg-white transition">Apply for Recruitment</a>
     </section>
 
     <section id="roster" class="py-24 px-6 max-w-7xl mx-auto">
-        <h2 class="text-4xl font-heading font-bold mb-12 border-l-4 border-primary pl-4 uppercase">The Squad</h2>
+        <h2 class="text-4xl font-heading font-bold mb-12 border-l-4 border-primary pl-4 uppercase">Roster</h2>
         <div id="roster-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
     <section id="join" class="py-24 px-6 bg-panel">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-5xl font-heading font-bold mb-8 uppercase italic">Recruitment</h2>
+            <h2 class="text-5xl font-heading font-bold mb-8 uppercase italic">Join the <span class="text-primary">Squad</span></h2>
             <div class="glass p-1 rounded-xl overflow-hidden shadow-2xl">
                 <iframe id="recruitment-form" src="" width="100%" height="800" frameborder="0"></iframe>
             </div>
@@ -76,64 +83,85 @@
     </section>
 
     <div id="auth-modal" class="fixed inset-0 z-[100] bg-dark/95 backdrop-blur-md hidden flex items-center justify-center p-6">
-        <div class="glass max-w-sm w-full p-10 relative border border-white/10">
+        <div class="glass max-w-sm w-full p-10 relative border border-white/10 text-center">
             <button onclick="toggleAuth()" class="absolute top-4 right-4 text-gray-500 hover:text-white">✕</button>
             <div id="auth-content"></div>
         </div>
     </div>
 
     <script>
-        // UI Initializer
+        // Initialize App
         document.getElementById('recruitment-form').src = DB.googleFormURL;
         const grid = document.getElementById('roster-grid');
         DB.roster.forEach(p => {
-            grid.innerHTML += `<div class="glass p-6"><h3 class="text-2xl font-heading font-bold italic">${p.ign}</h3><p class="text-xs text-primary font-bold uppercase tracking-widest">${p.game}</p></div>`;
+            grid.innerHTML += `<div class="glass p-6"><h3 class="text-2xl font-heading font-bold italic">${p.ign}</h3><p class="text-xs text-primary font-bold uppercase">${p.game}</p></div>`;
         });
 
-        // AUTH FUNCTIONS
+        // SESSION CHECK: Automatically signs in user if data is saved in browser/server
+        async function checkSession() {
+            const { data: { session } } = await _supabase.auth.getSession();
+            updateUI(session?.user);
+        }
+        checkSession();
+
+        function updateUI(user) {
+            const loggedOut = document.getElementById('logged-out-nav');
+            const loggedIn = document.getElementById('logged-in-nav');
+            if (user) {
+                loggedOut.classList.add('hidden');
+                loggedIn.classList.remove('hidden');
+                document.getElementById('user-display').innerText = user.email.split('@')[0];
+            } else {
+                loggedOut.classList.remove('hidden');
+                loggedIn.classList.add('hidden');
+            }
+        }
+
         function toggleAuth(mode) {
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-content');
             if(!mode) return modal.classList.add('hidden');
-            
             modal.classList.remove('hidden');
-            const inputStyles = "w-full bg-white/5 border border-white/10 p-4 mb-4 text-xs outline-none focus:border-primary text-white";
+            
+            const commonInput = "w-full bg-white/5 border border-white/10 p-4 mb-4 text-xs outline-none focus:border-primary text-white";
             
             if(mode === 'login') {
                 content.innerHTML = `
-                    <h2 class="text-2xl font-heading font-bold mb-6 italic uppercase">Login</h2>
-                    <input id="email" type="email" placeholder="EMAIL" class="${inputStyles}">
-                    <input id="pass" type="password" placeholder="PASSWORD" class="${inputStyles}">
-                    <button onclick="signIn()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase hover:bg-white transition">Sign In</button>
+                    <h2 class="text-2xl font-heading font-bold mb-6 italic uppercase">Sign In</h2>
+                    <input id="email" type="email" placeholder="EMAIL" class="${commonInput}">
+                    <input id="pass" type="password" placeholder="PASSWORD" class="${commonInput}">
+                    <button onclick="handleSignIn()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase hover:bg-white transition">Login to NxR</button>
                 `;
             } else {
                 content.innerHTML = `
                     <h2 class="text-2xl font-heading font-bold mb-6 italic uppercase">Register</h2>
-                    <input id="email" type="email" placeholder="EMAIL" class="${inputStyles}">
-                    <input id="pass" type="password" placeholder="PASSWORD" class="${inputStyles}">
-                    <button onclick="signUp()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase hover:bg-white transition">Create Account</button>
+                    <input id="email" type="email" placeholder="EMAIL" class="${commonInput}">
+                    <input id="pass" type="password" placeholder="PASSWORD" class="${commonInput}">
+                    <button onclick="handleSignUp()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase hover:bg-white transition">Create Account</button>
                 `;
             }
         }
 
-        async function signUp() {
+        async function handleSignUp() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('pass').value;
             const { data, error } = await _supabase.auth.signUp({ email, password });
-            if (error) alert("Error: " + error.message);
-            else alert("Success! Please check your email to verify your account.");
+            if (error) alert(error.message);
+            else { alert("Success! Credentials saved. Verify your email to login."); toggleAuth(); }
         }
 
-        async function signIn() {
+        async function handleSignIn() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('pass').value;
             const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
-            if (error) alert("Error: " + error.message);
-            else { 
-                alert("Login successful!"); 
-                document.getElementById('nav-auth').innerHTML = `<span class="text-primary text-[10px] font-bold uppercase tracking-widest">Logged In: ${data.user.email.split('@')[0]}</span>`;
-                toggleAuth(); 
-            }
+            if (error) alert(error.message);
+            else { updateUI(data.user); toggleAuth(); }
+        }
+
+        async function handleSignOut() {
+            const { error } = await _supabase.auth.signOut();
+            if (error) alert(error.message);
+            else { window.location.reload(); }
         }
     </script>
 </body>
