@@ -54,10 +54,15 @@
     </script>
 
     <nav class="fixed w-full z-50 px-8 py-5 flex justify-between items-center glass border-b border-white/5">
-        <div class="flex items-center gap-4">
-            <img src="NxREsportsLogo.jpg" onerror="this.src='https://via.placeholder.com/50?text=NxR'" class="h-10 w-10 border-r-2 border-primary object-cover">
-            <span class="font-heading font-bold text-lg tracking-tighter uppercase italic neon-text">NOTX<span class="text-primary">RIPPERS</span></span>
-        </div>
+        <a href="#" class="flex items-center gap-4 group">
+            <img src="NxREsportsLogo.jpg" 
+                 alt="NxR Logo"
+                 onerror="this.src='https://via.placeholder.com/50?text=NxR'" 
+                 class="h-10 w-auto pr-4 border-r-2 border-primary object-contain transition-transform group-hover:scale-110">
+            <span class="font-heading font-bold text-lg tracking-tighter uppercase italic neon-text">
+                NOTX<span class="text-primary">RIPPERS</span>
+            </span>
+        </a>
         <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
             <a href="#about" class="hover:text-primary transition">About</a>
             <a href="#staff" class="hover:text-primary transition">Staff</a>
