@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOTxRIPPERS | Professional Esports Organization</title>
+    <title>NOTxRIPPERS | Official Esports Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
@@ -20,23 +20,151 @@
     </script>
     <style>
         body { 
-            background-color: #020202; 
-            color: white; 
-            scroll-behavior: smooth;
+            background-color: #020202; color: white; scroll-behavior: smooth;
             background-image: radial-gradient(circle at 2px 2px, rgba(0, 209, 255, 0.05) 1px, transparent 0);
             background-size: 40px 40px;
         }
-        .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
-        .neon-border { border: 1px solid rgba(0, 209, 255, 0.3); box-shadow: 0 0 15px rgba(0, 209, 255, 0.1); }
+        .glass { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+        .neon-border { border: 1px solid rgba(0, 209, 255, 0.3); box-shadow: 0 0 20px rgba(0, 209, 255, 0.1); }
         .neon-text { text-shadow: 0 0 10px rgba(0, 209, 255, 0.5); }
-        .hidden { display: none; }
-        .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; }
-        .skew-btn:hover { transform: skew(-10deg) scale(1.05); }
+        .skew-btn { transform: skew(-10deg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+        .skew-btn:hover { transform: skew(-10deg) scale(1.05); box-shadow: 0 0 25px rgba(0, 209, 255, 0.4); }
         .skew-btn span { transform: skew(10deg); display: inline-block; }
-        .btn-glow:hover { box-shadow: 0 0 20px rgba(0, 209, 255, 0.4); }
+        .scanline { width: 100%; height: 2px; background: rgba(0, 209, 255, 0.3); position: absolute; animation: scan 3s linear infinite; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #020202; }
+        ::-webkit-scrollbar-thumb { background: #00D1FF; }
     </style>
 </head>
 <body class="font-body overflow-x-hidden">
+
+    <nav class="fixed w-full z-[100] px-6 py-4 flex justify-between items-center glass border-b border-white/10">
+        <div class="flex items-center gap-4">
+            <img src="./NxREsportsLogo.jpg" alt="NxR" class="h-10 w-auto border-r-2 border-primary pr-4" onerror="this.src='https://via.placeholder.com/40'">
+            <span class="font-heading font-bold text-lg italic neon-text tracking-tighter uppercase">NOTX<span class="text-primary">RIPPERS</span></span>
+        </div>
+        <div class="hidden lg:flex gap-8 text-[10px] font-bold uppercase tracking-[0.3em]">
+            <a href="#about" class="hover:text-primary transition">About</a>
+            <a href="#compliance" class="hover:text-primary transition text-primary">Compliance</a>
+            <a href="#staff" class="hover:text-primary transition">Staff</a>
+            <a href="#join" class="hover:text-primary transition">Recruitment</a>
+            <div id="auth-ui-desktop" class="border-l border-white/20 pl-6 flex gap-4"></div>
+        </div>
+        <button onclick="toggleMenu()" class="lg:hidden text-primary">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-dark/95 z-[90] flex flex-col items-center justify-center gap-8 hidden">
+        <a href="#about" onclick="toggleMenu()" class="text-2xl font-heading italic">ABOUT</a>
+        <a href="#compliance" onclick="toggleMenu()" class="text-2xl font-heading italic text-primary">COMPLIANCE</a>
+        <a href="#staff" onclick="toggleMenu()" class="text-2xl font-heading italic">STAFF</a>
+        <a href="#join" onclick="toggleMenu()" class="text-2xl font-heading italic">JOIN</a>
+        <div id="auth-ui-mobile" class="mt-8"></div>
+    </div>
+
+    <section class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070')] bg-cover bg-center opacity-10"></div>
+        <div class="z-10">
+            <div class="inline-block px-4 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.5em] mb-8 skew-x-[-15deg]">INDIA COMPLIANT ESTD 2026</div>
+            <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 tracking-tighter uppercase leading-none">RIP THE<br><span class="text-primary">ARENA</span></h1>
+            <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase inline-block mt-8"><span>Initiate Recruitment</span></a>
+        </div>
+    </section>
+
+    <section id="compliance" class="py-32 px-6 bg-panel relative overflow-hidden">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <div class="absolute -top-10 -left-10 text-primary/10 font-heading text-9xl">KYC</div>
+                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6 leading-tight">Regulatory<br><span class="text-primary">Protocol</span></h2>
+                <p class="text-gray-400 text-lg leading-relaxed mb-8 italic">
+                    "According to latest Gaming Rules by Indian Govt since 2025. We are supporting & respecting Govt rules and according to that we are implementing the esports arena."
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="./PROMOTION AND REGULATIONS OF ONLINE GAMING AND RULES .pdf" download class="skew-btn border border-primary text-primary px-6 py-3 text-[10px] font-bold uppercase"><span>Download Official Act</span></a>
+                </div>
+            </div>
+
+            <div class="glass p-8 border-t-2 border-primary relative overflow-hidden shadow-2xl">
+                <div class="scanline"></div>
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-3 h-3 bg-primary animate-pulse"></div>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Operative Identity Verification</span>
+                </div>
+                
+                <div id="kyc-container" class="space-y-6">
+                    <div>
+                        <label class="block text-[9px] text-gray-500 uppercase tracking-widest mb-2">Legal Verification Method</label>
+                        <select id="kyc-type" class="w-full bg-white/5 border border-white/10 p-4 text-xs text-white outline-none focus:border-primary">
+                            <option value="aadhaar">Aadhaar (OTP Based)</option>
+                            <option value="pan">PAN Card</option>
+                            <option value="passport">Passport</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[9px] text-gray-500 uppercase tracking-widest mb-2">ID Number / Document Token</label>
+                        <input type="text" placeholder="XXXX-XXXX-XXXX" class="w-full bg-white/5 border border-white/10 p-4 text-xs text-white outline-none focus:border-primary">
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="age-check" class="w-4 h-4 accent-primary">
+                        <label for="age-check" class="text-[10px] text-gray-400 uppercase">I confirm I am above 18 years as per Indian Law</label>
+                    </div>
+                    <button onclick="simulateVerification()" class="w-full bg-primary text-black py-4 font-black text-[10px] uppercase skew-btn"><span>Execute Verification</span></button>
+                </div>
+                <div id="kyc-success" class="hidden text-center py-8">
+                    <div class="text-primary text-4xl mb-4">✓</div>
+                    <p class="font-heading italic text-sm">IDENTITY SECURED</p>
+                    <p class="text-[9px] text-gray-500 mt-2 uppercase">Compliant with 2025 Regulations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="staff" class="py-32 px-6">
+        <h2 class="text-4xl font-heading font-bold uppercase italic text-center mb-20">Command <span class="text-primary">Staff</span></h2>
+        <div id="staff-grid" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+    </section>
+
+    <section id="profile-section" class="py-32 px-6 hidden">
+        <div class="max-w-4xl mx-auto glass p-12 border-l-4 border-primary">
+            <h2 class="text-3xl font-heading font-bold italic uppercase tracking-tighter mb-4">Operative <span class="text-primary">Profile</span></h2>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-32 h-32 bg-primary/20 border border-primary flex items-center justify-center text-primary text-4xl">NxR</div>
+                <div>
+                    <p id="profile-email" class="text-xl font-bold tracking-widest uppercase mb-2"></p>
+                    <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em] mb-6 italic">Status: Verified Member</p>
+                    <button onclick="handleDeleteAccount()" class="text-[10px] text-red-500 font-bold uppercase border-b border-red-500/30 hover:text-red-400">Request Data Erasure</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="join" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-heading font-bold uppercase italic text-center mb-12">Recruitment <span class="text-primary">Portal</span></h2>
+            <div class="neon-border p-1 bg-dark min-h-[900px]">
+                <iframe id="recruitment-form" src="" width="100%" height="900" frameborder="0"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-white/10 bg-panel text-center">
+        <div class="font-heading font-bold text-lg italic neon-text mb-8 uppercase">NOTX<span class="text-primary">RIPPERS</span></div>
+        <p class="text-gray-600 text-[10px] tracking-[0.8em] uppercase mb-10">Professional Esports Infrastructure</p>
+        <div id="visitor-stats" class="text-[9px] text-primary/60 font-mono">[ ANALYZING TRAFFIC... ]</div>
+        <p class="mt-8 text-gray-500 text-[9px] uppercase tracking-widest leading-loose">
+            © 2026 NOTxRIPPERS. All Rights Reserved.<br>
+            Compliant with Ministry of Electronics and Information Technology (MeitY) Rules.
+        </p>
+    </footer>
+
+    <div id="auth-modal" class="fixed inset-0 z-[200] bg-dark/98 backdrop-blur-2xl hidden flex items-center justify-center p-4">
+        <div class="glass max-w-md w-full p-12 relative border border-white/10">
+            <button onclick="toggleAuth()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-3xl">&times;</button>
+            <div id="auth-content" class="text-center"></div>
+        </div>
+    </div>
 
     <script>
         const SUPABASE_URL = 'https://pnplwsvhxqxzwoweiyfh.supabase.co';
@@ -44,7 +172,6 @@
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         const DB = {
-            logo: "./NxREsportsLogo.jpg",
             form: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true",
             staff: [
                 { name: "RIPPER", role: "FOUNDER & CEO", bio: "Visionary lead of NxR operations." },
@@ -52,215 +179,55 @@
                 { name: "GHOST", role: "CHIEF STRATEGIST", bio: "Overseeing competitive integrity." }
             ]
         };
-    </script>
 
-    <nav class="fixed w-full z-50 px-6 md:px-8 py-4 flex justify-between items-center glass border-b border-white/5">
-        <div class="flex items-center gap-3 md:gap-4">
-            <img src="./NxREsportsLogo.jpg" alt="NxR Logo" onerror="this.src='https://via.placeholder.com/120x40/00D1FF/020202?text=NxR'" class="h-8 md:h-10 w-auto shrink-0 object-contain pr-3 md:pr-4 border-r-2 border-primary rounded-sm">
-            <span class="font-heading font-bold text-base md:text-lg tracking-tighter uppercase italic neon-text">NOTX<span class="text-primary">RIPPERS</span></span>
-        </div>
-        
-        <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-            <a href="#about" class="hover:text-primary transition">About</a>
-            <a href="#staff" class="hover:text-primary transition">Staff</a>
-            <a href="#join" class="hover:text-primary transition">Recruitment</a>
-            <a href="#contact" class="hover:text-primary transition">Contact</a>
-            <div id="auth-ui-desktop" class="flex gap-4 ml-4 border-l border-white/10 pl-4"></div>
-        </div>
-
-        <button onclick="toggleMobileMenu()" class="md:hidden text-primary focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
-    </nav>
-
-    <div id="mobile-menu" class="fixed top-[70px] left-0 w-full glass border-b border-white/10 flex-col items-center py-6 gap-6 hidden z-40 md:hidden shadow-2xl">
-        <a href="#about" onclick="toggleMobileMenu()" class="text-sm font-heading italic font-bold uppercase tracking-widest text-white hover:text-primary transition">About</a>
-        <a href="#staff" onclick="toggleMobileMenu()" class="text-sm font-heading italic font-bold uppercase tracking-widest text-white hover:text-primary transition">Staff</a>
-        <a href="#join" onclick="toggleMobileMenu()" class="text-sm font-heading italic font-bold uppercase tracking-widest text-white hover:text-primary transition">Recruitment</a>
-        <a href="#contact" onclick="toggleMobileMenu()" class="text-sm font-heading italic font-bold uppercase tracking-widest text-white hover:text-primary transition">Contact</a>
-        <div id="auth-ui-mobile" class="flex flex-col gap-4 mt-4 w-3/4 items-center border-t border-white/10 pt-6"></div>
-    </div>
-
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
-        <div class="inline-block px-3 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">ESTD 2026</div>
-        <h1 class="text-5xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter">RIP THE <span class="text-primary">ARENA</span></h1>
-        <div class="flex gap-6 mt-4">
-            <a href="#join" class="skew-btn bg-primary text-black px-8 md:px-12 py-4 md:py-5 font-black text-xs uppercase btn-glow"><span>Join Organization</span></a>
-        </div>
-    </section>
-
-    <section id="about" class="py-24 md:py-32 px-6 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">Introduction</h2>
-                <p class="text-gray-400 leading-loose text-base md:text-lg font-light">
-                    Founded in 2026, <span class="text-white font-bold tracking-widest">NOTxRIPPERS (NxR)</span> is an elite esports infrastructure. We focus on mechanical precision, high-level strategy, and the professional growth of our athletes.
-                </p>
-            </div>
-            <div class="glass p-8 md:p-10 border-t-2 border-primary/50">
-                <h3 class="text-lg md:text-xl font-heading font-bold uppercase italic mb-6 text-primary">Mission & Vision</h3>
-                <p class="text-gray-500 text-sm mb-4 italic">"To define the next era of competitive dominance through discipline and technological edge."</p>
-                <p class="text-gray-400 text-sm leading-relaxed">Our mission is to cultivate an ecosystem where talent meets strategy, providing the resources necessary for undisputed victory.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="staff" class="py-24 md:py-32 bg-panel border-y border-white/5">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-heading font-bold uppercase italic mb-12 md:mb-16 text-center">Leadership <span class="text-primary">Staff</span></h2>
-            <div id="staff-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                </div>
-        </div>
-    </section>
-
-    <section id="profile-section" class="py-24 md:py-32 px-6 hidden">
-        <div class="max-w-4xl mx-auto glass p-8 md:p-12 border-l-4 border-primary overflow-hidden break-words">
-            <h2 class="text-2xl md:text-3xl font-heading font-bold uppercase italic mb-4 tracking-tighter">Access <span class="text-primary">Granted</span></h2>
-            <p id="profile-email" class="text-white font-bold tracking-widest uppercase text-xs md:text-sm mb-2"></p>
-            <p class="text-gray-500 text-[10px] uppercase tracking-widest italic mb-8">NxR Verified Personnel</p>
-            
-            <div class="border-t border-white/10 pt-6 mt-4">
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Danger Zone</p>
-                <button onclick="handleDeleteAccount()" class="skew-btn bg-red-900/20 border border-red-500 text-red-500 px-6 py-3 text-[10px] font-black uppercase hover:bg-red-600 hover:text-white transition shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-                    <span>Initiate Data Erasure</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="join" class="py-24 md:py-32 px-6 max-w-5xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold uppercase italic mb-12 text-center">Recruitment <span class="text-primary">Portal</span></h2>
-        <div class="neon-border p-1 bg-dark overflow-hidden">
-            <iframe id="recruitment-form" src="" width="100%" height="900" frameborder="0" class="w-full max-w-full"></iframe>
-        </div>
-    </section>
-
-    <section id="contact" class="py-24 md:py-32 px-6 bg-panel border-t border-white/5">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold uppercase italic tracking-tighter mb-4">Secure <span class="text-primary">Comms</span></h2>
-                <p class="text-gray-500 text-xs md:text-sm tracking-widest uppercase">Direct line to NxR Command</p>
-            </div>
-            
-            <div class="glass p-6 md:p-10 border-t-2 border-primary relative shadow-2xl">
-                <form action="https://formsubmit.co/notxrippers@gmail.com" method="POST" class="space-y-6">
-                    <input type="hidden" name="_subject" value="New Transmission | NOTxRIPPERS Support">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-[10px] text-primary font-bold uppercase tracking-widest mb-2">Operative Name</label>
-                            <input type="text" name="Name" placeholder="Enter full name" required class="w-full bg-white/5 border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition rounded-none">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] text-primary font-bold uppercase tracking-widest mb-2">Email Address</label>
-                            <input type="email" name="Email" placeholder="your@email.com" required class="w-full bg-white/5 border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition rounded-none">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] text-primary font-bold uppercase tracking-widest mb-2">WhatsApp / Phone Number</label>
-                        <input type="tel" name="WhatsApp_Number" placeholder="+1 234 567 8900" required class="w-full bg-white/5 border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition rounded-none">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] text-primary font-bold uppercase tracking-widest mb-2">Transmission Message</label>
-                        <textarea name="Message" rows="5" placeholder="Enter your query or request..." required class="w-full bg-white/5 border border-white/10 p-4 text-sm text-white outline-none focus:border-primary transition resize-none rounded-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full skew-btn bg-primary text-black py-4 font-black text-xs uppercase btn-glow mt-4">
-                        <span>Transmit Message</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 border-t border-white/5 text-center bg-dark relative overflow-hidden px-4">
-        <div class="mb-6"><span class="font-heading font-bold text-sm tracking-tighter uppercase italic">NOTX<span class="text-primary">RIPPERS</span></span></div>
-        <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em] mb-4 leading-loose">Copyright &copy; 2026 NOTxRIPPERS.<br class="md:hidden"> All Rights Reserved. ESTD 2026.</p>
-        
-        <div class="inline-block glass px-4 md:px-6 py-3 border border-primary/20 mt-4 rounded-sm w-full md:w-auto overflow-hidden">
-            <p id="visitor-stats" class="text-[9px] md:text-[10px] font-bold tracking-widest text-gray-400 font-heading animate-pulse break-words">
-                [ INIT. SYS ] ESTABLISHING SECURE CONNECTION...
-            </p>
-        </div>
-    </footer>
-
-    <div id="auth-modal" class="fixed inset-0 z-[100] bg-dark/98 backdrop-blur-xl hidden flex items-center justify-center p-4">
-        <div class="glass max-w-md w-full p-8 md:p-12 relative border border-white/10 text-center">
-            <button onclick="toggleAuth()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-3xl">&times;</button>
-            <div id="auth-content"></div>
-        </div>
-    </div>
-
-    <script>
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
+        function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if(menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
-            } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
-            }
+            menu.classList.toggle('hidden');
         }
 
+        function simulateVerification() {
+            const check = document.getElementById('age-check').checked;
+            if(!check) return alert("You must be 18+ to enter the arena.");
+            document.getElementById('kyc-container').classList.add('hidden');
+            document.getElementById('kyc-success').classList.remove('hidden');
+        }
+
+        // Initialize Data
         document.getElementById('recruitment-form').src = DB.form;
-        
-        // Staff Generator
         const staffContainer = document.getElementById('staff-grid');
         DB.staff.forEach(s => {
             staffContainer.innerHTML += `
-                <div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition group">
-                    <div class="text-primary font-bold text-[10px] mb-2 tracking-[0.3em]">${s.role}</div>
-                    <h3 class="text-xl md:text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed italic">${s.bio}</p>
+                <div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition-all duration-500 group">
+                    <div class="text-primary font-bold text-[9px] mb-4 tracking-[0.4em]">${s.role}</div>
+                    <h3 class="text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed italic border-t border-white/5 pt-4">${s.bio}</p>
                 </div>`;
         });
 
-        // Visitor Tracker Logic
-        async function trackVisitor() {
-            const statsElement = document.getElementById('visitor-stats');
-            try {
-                const geoRes = await fetch('https://ipapi.co/json/');
-                const geoData = await geoRes.json();
-                const country = geoData.country_name || 'UNKNOWN';
-
-                const countRes = await fetch('https://api.counterapi.dev/v1/notxrippers_official/visits/up');
-                const countData = await countRes.json();
-                const count = countData.count || '1';
-
-                statsElement.innerHTML = `GLOBAL TRAFFIC: <span class="text-primary">${count}</span> &nbsp;|&nbsp; ORIGIN: <span class="text-primary">${country.toUpperCase()}</span>`;
-                statsElement.classList.remove('animate-pulse');
-            } catch (error) {
-                statsElement.innerHTML = `SECURE CONNECTION ESTABLISHED`;
-            }
-        }
-
+        // Supabase Auth Logic
         async function init() {
             const { data: { session } } = await _supabase.auth.getSession();
             updateUI(session?.user);
-            trackVisitor(); 
+            trackVisitor();
         }
         init();
 
         function updateUI(user) {
-            const desktopUI = document.getElementById('auth-ui-desktop');
-            const mobileUI = document.getElementById('auth-ui-mobile');
-            const profileSec = document.getElementById('profile-section');
+            const desktop = document.getElementById('auth-ui-desktop');
+            const mobile = document.getElementById('auth-ui-mobile');
+            const profile = document.getElementById('profile-section');
             
-            const loggedInBtn = `<button onclick="handleSignOut()" class="skew-btn w-full md:w-auto border border-red-500 text-red-500 px-4 py-2 text-[10px] font-bold uppercase hover:bg-red-500 hover:text-white transition"><span>Sign Out</span></button>`;
-            const loggedOutBtns = `<button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition md:mr-4 mb-4 md:mb-0">Login</button><button onclick="toggleAuth('register')" class="skew-btn w-full md:w-auto bg-primary text-black px-6 py-2 text-[10px] font-black uppercase btn-glow"><span>Register</span></button>`;
-
-            if (user) {
-                desktopUI.innerHTML = loggedInBtn;
-                mobileUI.innerHTML = loggedInBtn;
-                profileSec.classList.remove('hidden');
+            const content = user 
+                ? `<button onclick="handleSignOut()" class="skew-btn bg-red-500/10 border border-red-500 text-red-500 px-6 py-2 text-[9px] font-bold uppercase"><span>Sign Out</span></button>`
+                : `<button onclick="toggleAuth('login')" class="text-[9px] font-bold uppercase hover:text-primary transition mr-6">Login</button><button onclick="toggleAuth('register')" class="skew-btn bg-primary text-black px-6 py-2 text-[9px] font-black uppercase"><span>Join Us</span></button>`;
+            
+            desktop.innerHTML = content;
+            mobile.innerHTML = content;
+            if(user) {
+                profile.classList.remove('hidden');
                 document.getElementById('profile-email').innerText = user.email;
             } else {
-                desktopUI.innerHTML = loggedOutBtns;
-                mobileUI.innerHTML = loggedOutBtns;
-                profileSec.classList.add('hidden');
+                profile.classList.add('hidden');
             }
         }
 
@@ -269,21 +236,17 @@
             const content = document.getElementById('auth-content');
             if(!mode) return modal.classList.add('hidden');
             modal.classList.remove('hidden');
+            const inputStyle = "w-full bg-white/5 border border-white/10 p-5 mb-5 text-sm text-white outline-none focus:border-primary";
             
-            const mobileMenu = document.getElementById('mobile-menu');
-            if(!mobileMenu.classList.contains('hidden')) toggleMobileMenu();
-
-            const style = "w-full bg-white/5 border border-white/10 p-4 md:p-5 mb-5 text-sm text-white outline-none focus:border-primary rounded-none";
-            if(mode === 'login') {
-                content.innerHTML = `<h2 class="text-2xl font-heading font-bold mb-8 uppercase italic">Login</h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="KEY" class="${style}"><button onclick="handleSignIn()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase btn-glow">Initialize</button>`;
-            } else {
-                content.innerHTML = `<h2 class="text-2xl font-heading font-bold mb-8 uppercase italic">Register</h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="PASSWORD" class="${style}"><button onclick="handleSignUp()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase btn-glow">Establish ID</button>`;
-            }
+            content.innerHTML = `<h2 class="text-2xl font-heading font-bold mb-8 uppercase italic">${mode}</h2>
+                <input id="email" type="email" placeholder="EMAIL" class="${inputStyle}">
+                <input id="pass" type="password" placeholder="KEY" class="${inputStyle}">
+                <button onclick="${mode === 'login' ? 'handleSignIn' : 'handleSignUp'}()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase skew-btn"><span>Execute ${mode}</span></button>`;
         }
 
         async function handleSignUp() {
             const { error } = await _supabase.auth.signUp({ email: document.getElementById('email').value, password: document.getElementById('pass').value });
-            if (error) alert(error.message); else { alert("Verification link sent to email."); toggleAuth(); }
+            if (error) alert(error.message); else { alert("Verification link sent."); toggleAuth(); }
         }
 
         async function handleSignIn() {
@@ -293,25 +256,12 @@
 
         async function handleSignOut() { await _supabase.auth.signOut(); window.location.reload(); }
 
-        // NEW: Handle Account Deletion Logic
-        async function handleDeleteAccount() {
-            const confirmed = confirm("CRITICAL WARNING: Are you sure you want to permanently erase your NxR Operative Data? This action is irreversible.");
-            
-            if (confirmed) {
-                // Try to delete via Supabase remote function (RPC)
-                const { error } = await _supabase.rpc('delete_user');
-                
-                if (error) {
-                    // Fallback if the Supabase backend SQL function is not setup yet
-                    alert("SYSTEM NOTICE: Direct data deletion blocked by server firewall. To finalize data erasure, please submit a 'Data Deletion' request through the Secure Comms panel below. Your local session will now be terminated.");
-                } else {
-                    alert("Operative data permanently erased. Connection terminated.");
-                }
-                
-                // Sign the user out locally regardless so their screen clears
-                await _supabase.auth.signOut();
-                window.location.reload();
-            }
+        async function trackVisitor() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/notxrippers_modern/visits/up');
+                const data = await res.json();
+                document.getElementById('visitor-stats').innerText = `GLOBAL OPERATIVES CONNECTED: ${data.count}`;
+            } catch(e) { document.getElementById('visitor-stats').innerText = `ENCRYPTED CONNECTION ESTABLISHED`; }
         }
     </script>
 </body>
