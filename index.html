@@ -23,17 +23,22 @@
             background-color: #020202; 
             color: white; 
             scroll-behavior: smooth;
-            background-image: radial-gradient(circle at 2px 2px, rgba(0, 209, 255, 0.05) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 209, 255, 0.1) 1px, transparent 0);
             background-size: 40px 40px;
         }
         .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
         .neon-border { border: 1px solid rgba(0, 209, 255, 0.3); box-shadow: 0 0 15px rgba(0, 209, 255, 0.1); }
         .neon-text { text-shadow: 0 0 10px rgba(0, 209, 255, 0.5); }
         .hidden { display: none; }
-        .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; }
-        .skew-btn:hover { transform: skew(-10deg) scale(1.05); }
+        .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; display: inline-block; }
+        .skew-btn:hover { transform: skew(-10deg) scale(1.05); box-shadow: 0 0 20px rgba(0, 209, 255, 0.4); }
         .skew-btn span { transform: skew(10deg); display: inline-block; }
-        input:focus { border-color: #00D1FF !important; box-shadow: 0 0 10px rgba(0, 209, 255, 0.2); }
+        
+        input, textarea { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; }
+        input:focus, textarea:focus { border-color: #00D1FF !important; outline: none; background: rgba(0, 209, 255, 0.05) !important; }
+
+        .fade-in { animation: fadeIn 1.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="font-body overflow-x-hidden">
@@ -47,9 +52,13 @@
             logo: "NxREsportsLogo.jpg",
             form: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true",
             staff: [
-                { name: "RIPPER", role: "FOUNDER & CEO", bio: "Visionary lead of NxR operations." },
-                { name: "VENOM", role: "CO-FOUNDER", bio: "Tactical head and roster management." },
-                { name: "GHOST", role: "CHIEF STRATEGIST", bio: "Overseeing competitive integrity." }
+                { name: "RIPPER", role: "FOUNDER & CEO", bio: "The tactical architect defining the NxR legacy." },
+                { name: "VENOM", role: "CO-FOUNDER", bio: "Head of roster dynamics and competitive strategy." },
+                { name: "GHOST", role: "CHIEF STRATEGIST", bio: "In charge of meta-analysis and hardware optimization." }
+            ],
+            news: [
+                { title: "SYSTEMS ONLINE", date: "MAR 2026", desc: "Official web infrastructure deployed for NOT x RIPPERS." },
+                { title: "RECRUITMENT WAVE", date: "FEB 2026", desc: "Accepting applications for the tactical division." }
             ]
         };
     </script>
@@ -60,77 +69,120 @@
             <span class="font-heading font-bold text-lg tracking-tighter uppercase italic neon-text">NOTX<span class="text-primary">RIPPERS</span></span>
         </div>
         <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-            <a href="#about" class="hover:text-primary transition">About</a>
-            <a href="#staff" class="hover:text-primary transition">Staff</a>
+            <a href="#about" class="hover:text-primary transition">Strategy</a>
+            <a href="#staff" class="hover:text-primary transition">Leadership</a>
+            <a href="#contact" class="hover:text-primary transition">Contact</a>
             <a href="#join" class="hover:text-primary transition">Recruitment</a>
         </div>
         <div id="auth-ui" class="flex gap-4"></div>
     </nav>
 
     <section class="h-screen flex flex-col items-center justify-center text-center px-4">
-        <div class="inline-block px-3 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">ESTD 2026</div>
-        <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter leading-none">RIP THE <br><span class="text-primary">ARENA</span></h1>
-        <div class="flex gap-6 mt-8">
-            <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase btn-glow"><span>Join Organization</span></a>
+        <div class="fade-in">
+            <div class="inline-block px-4 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">ESTD 2026</div>
+            <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter leading-none">RIP THE <br><span class="text-primary">ARENA</span></h1>
+            <p class="text-gray-500 max-w-xl mx-auto mb-10 text-xs tracking-[0.4em] uppercase font-light">Evolution through mechanical precision.</p>
+            <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase"><span>Join The Ranks</span></a>
         </div>
     </section>
 
     <section id="about" class="py-32 px-6 max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">Introduction</h2>
-                <p class="text-gray-400 leading-loose text-lg font-light">
-                    Founded in 2026, <span class="text-white font-bold tracking-widest uppercase">NOTxRIPPERS (NxR)</span> is an elite esports infrastructure built for tactical dominance and mechanical precision.
+                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">Operations</h2>
+                <p class="text-gray-400 leading-loose text-lg font-light mb-10">
+                    Founded in 2026, <span class="text-white font-bold tracking-widest uppercase">NOTxRIPPERS</span> is a high-performance esports infrastructure.
                 </p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="border-t border-white/10 pt-4"><h4 class="text-primary text-[10px] font-bold uppercase tracking-widest">Mission</h4><p class="text-xs text-gray-500 italic mt-2">World dominance.</p></div>
+                    <div class="border-t border-white/10 pt-4"><h4 class="text-primary text-[10px] font-bold uppercase tracking-widest">Vision</h4><p class="text-xs text-gray-500 italic mt-2">Professionalism redefined.</p></div>
+                </div>
             </div>
-            <div class="glass p-10 border-t-2 border-primary/50">
-                <h3 class="text-xl font-heading font-bold uppercase italic mb-6 text-primary">Mission & Vision</h3>
-                <p class="text-gray-400 text-sm leading-relaxed font-light italic opacity-80">"Defining the next era of competitive dominance through discipline and technological edge."</p>
+            <div class="glass p-10 border-t-2 border-primary/40 relative">
+                <div class="absolute -top-4 -right-4 bg-primary text-black font-black p-2 text-[10px] skew-x-[-15deg]">CORE VALUES</div>
+                <ul class="space-y-4 text-sm tracking-widest uppercase">
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-primary"></span> Integrity First</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-primary"></span> Absolute Precision</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-primary"></span> Tactical Evolution</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="staff" class="py-32 bg-panel border-y border-white/5">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-heading font-bold uppercase italic mb-16 tracking-tighter">Leadership <span class="text-primary">Staff</span></h2>
+    <section id="news" class="py-32 bg-panel">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl font-heading font-bold uppercase italic mb-16 text-center tracking-tighter">Live <span class="text-primary">Intel</span></h2>
+            <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </div>
+    </section>
+
+    <section id="staff" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl font-heading font-bold uppercase italic mb-16 tracking-tighter">Strategic <span class="text-primary">Leadership</span></h2>
             <div id="staff-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left"></div>
         </div>
     </section>
 
-    <section id="profile-section" class="py-32 px-6 hidden">
-        <div class="max-w-4xl mx-auto">
-            <div class="glass p-12 border-l-4 border-primary relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl font-black italic">VERIFIED</div>
-                <h2 class="text-3xl font-heading font-bold uppercase italic mb-6 tracking-tighter">Secure <span class="text-primary">Comms</span></h2>
-                <div class="space-y-4">
-                    <div>
-                        <p class="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Encrypted Email</p>
-                        <p id="profile-email" class="text-white font-bold tracking-widest uppercase text-sm"></p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-[10px] uppercase tracking-widest font-bold">Contact ID</p>
-                        <p id="profile-phone" class="text-primary font-bold tracking-widest uppercase text-sm"></p>
-                    </div>
-                </div>
-                <p class="text-gray-600 text-[9px] uppercase tracking-[0.3em] mt-10 italic">NxR Personnel Only • Unauthorized Access Prohibited</p>
+    <section id="contact" class="py-32 bg-panel border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-heading font-bold uppercase italic tracking-tighter">Contact <span class="text-primary">Command</span></h2>
+                <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em] mt-4 font-light">Secure communications link to NOTxRIPPERS HQ</p>
             </div>
+            
+            <div class="glass p-1 border-primary/20 neon-border">
+                <form action="https://formspree.io/f/notxrippers@gmail.com" method="POST" class="p-8 md:p-12 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Full Name</label>
+                            <input type="text" name="name" placeholder="OPERATOR NAME" class="w-full p-4 text-xs uppercase" required>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">WhatsApp / Phone No.</label>
+                            <input type="text" name="whatsapp" placeholder="+1 234 567 890" class="w-full p-4 text-xs" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Official Email Address</label>
+                        <input type="email" name="email" placeholder="NAME@GMAIL.COM" class="w-full p-4 text-xs" required>
+                    </div>
+                    
+                    <div>
+                        <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Encrypted Message</label>
+                        <textarea name="message" rows="5" placeholder="TYPE YOUR MESSAGE HERE..." class="w-full p-4 text-xs uppercase" required></textarea>
+                    </div>
+                    
+                    <div class="text-center pt-4">
+                        <button type="submit" class="skew-btn bg-primary text-black px-16 py-5 font-black text-xs uppercase">
+                            <span>Initialize Transmission</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="profile-section" class="py-32 px-6 hidden">
+        <div class="max-w-4xl mx-auto glass p-12 border-l-4 border-primary">
+            <h2 class="text-3xl font-heading font-bold uppercase italic mb-8 tracking-tighter">Verified <span class="text-primary">Personnel</span></h2>
+            <p id="profile-email" class="text-white font-bold tracking-widest uppercase text-sm mb-2"></p>
+            <p id="profile-phone" class="text-primary font-bold tracking-widest uppercase text-xs"></p>
         </div>
     </section>
 
     <section id="join" class="py-32 px-6 max-w-5xl mx-auto">
         <h2 class="text-4xl font-heading font-bold uppercase italic mb-12 text-center">Recruitment <span class="text-primary">Portal</span></h2>
-        <div class="neon-border p-1 bg-dark shadow-2xl">
-            <iframe id="recruitment-form" src="" width="100%" height="900" frameborder="0"></iframe>
-        </div>
+        <div class="neon-border p-1 bg-dark"><iframe id="recruitment-form" src="" width="100%" height="800" frameborder="0"></iframe></div>
     </section>
 
     <footer class="py-12 border-t border-white/5 text-center">
-        <span class="font-heading font-bold text-sm tracking-tighter uppercase italic">NOTX<span class="text-primary">RIPPERS</span></span>
-        <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em] mt-4 font-light">Copyright &copy; 2026 NOTxRIPPERS. All Rights Reserved. ESTD 2026.</p>
+        <span class="font-heading font-bold text-xs tracking-tighter uppercase italic">NOTX<span class="text-primary">RIPPERS</span></span>
+        <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em] mt-4 font-light">Copyright &copy; 2026 NOTxRIPPERS. All Rights Reserved.</p>
     </footer>
 
     <div id="auth-modal" class="fixed inset-0 z-[100] bg-dark/98 backdrop-blur-xl hidden flex items-center justify-center p-6">
-        <div class="glass max-w-md w-full p-12 relative border border-white/10 text-center shadow-2xl">
+        <div class="glass max-w-md w-full p-12 relative text-center">
             <button onclick="toggleAuth()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition text-2xl">✕</button>
             <div id="auth-content"></div>
         </div>
@@ -139,14 +191,14 @@
     <script>
         document.getElementById('recruitment-form').src = DB.form;
         
+        const newsContainer = document.getElementById('news-grid');
+        DB.news.forEach(n => {
+            newsContainer.innerHTML += `<div class="glass p-8 hover:border-white/20 transition"><div class="text-[9px] text-primary mb-2 font-bold uppercase">${n.date}</div><h3 class="text-xl font-heading font-bold italic uppercase mb-2">${n.title}</h3><p class="text-gray-500 text-xs italic font-light">${n.desc}</p></div>`;
+        });
+
         const staffContainer = document.getElementById('staff-grid');
         DB.staff.forEach(s => {
-            staffContainer.innerHTML += `
-                <div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition group cursor-default">
-                    <div class="text-primary font-bold text-[10px] mb-2 tracking-[0.3em] uppercase">${s.role}</div>
-                    <h3 class="text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed italic font-light">${s.bio}</p>
-                </div>`;
+            staffContainer.innerHTML += `<div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition group"><div class="text-primary font-bold text-[9px] mb-2 uppercase tracking-widest">${s.role}</div><h3 class="text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3><p class="text-gray-500 text-xs italic font-light">${s.bio}</p></div>`;
         });
 
         async function init() {
@@ -158,14 +210,11 @@
         function updateUI(user) {
             const authUI = document.getElementById('auth-ui');
             const profileSec = document.getElementById('profile-section');
-            
             if (user) {
-                authUI.innerHTML = `<button onclick="handleSignOut()" class="skew-btn border border-red-500 text-red-500 px-4 py-1 text-[10px] font-bold uppercase hover:bg-red-500 hover:text-white transition"><span>Sign Out</span></button>`;
+                authUI.innerHTML = `<button onclick="handleSignOut()" class="skew-btn border border-red-500 text-red-500 px-4 py-1 text-[9px] font-bold uppercase hover:bg-red-500 hover:text-white transition"><span>Logoff</span></button>`;
                 profileSec.classList.remove('hidden');
-                document.getElementById('profile-email').innerText = user.email;
-                // Properly retrieving phone from user_metadata
-                const phone = user.user_metadata?.phone || "NOT REGISTERED";
-                document.getElementById('profile-phone').innerText = phone;
+                document.getElementById('profile-email').innerText = `EMAIL: ${user.email}`;
+                document.getElementById('profile-phone').innerText = `WA: ${user.user_metadata?.phone || "PENDING ID"}`;
             } else {
                 authUI.innerHTML = `<button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition mr-4">Login</button><button onclick="toggleAuth('register')" class="skew-btn bg-primary text-black px-6 py-1 text-[10px] font-black uppercase"><span>Register</span></button>`;
                 profileSec.classList.add('hidden');
@@ -177,22 +226,11 @@
             const content = document.getElementById('auth-content');
             if(!mode) return modal.classList.add('hidden');
             modal.classList.remove('hidden');
-            
-            const style = "w-full bg-white/5 border border-white/10 p-5 mb-4 text-sm text-white outline-none focus:border-primary transition uppercase tracking-widest";
-            
+            const style = "w-full bg-white/5 border border-white/10 p-4 mb-4 text-xs text-white outline-none focus:border-primary transition uppercase tracking-widest";
             if(mode === 'login') {
-                content.innerHTML = `
-                    <h2 class="text-2xl font-heading font-bold mb-8 uppercase italic tracking-tighter">Initialize <span class="text-primary">Session</span></h2>
-                    <input id="email" type="email" placeholder="EMAIL" class="${style}">
-                    <input id="pass" type="password" placeholder="KEY CODE" class="${style}">
-                    <button onclick="handleSignIn()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase hover:bg-white transition btn-glow">Access Portal</button>`;
+                content.innerHTML = `<h2 class="text-xl font-heading font-bold mb-8 uppercase italic">Initialize Session</h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="pass" type="password" placeholder="KEY CODE" class="${style}"><button onclick="handleSignIn()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase">Portal Access</button>`;
             } else {
-                content.innerHTML = `
-                    <h2 class="text-2xl font-heading font-bold mb-8 uppercase italic tracking-tighter text-primary">Establish ID</h2>
-                    <input id="email" type="email" placeholder="ACTIVE EMAIL" class="${style}">
-                    <input id="phone" type="text" placeholder="WHATSAPP / CONTACT" class="${style}">
-                    <input id="pass" type="password" placeholder="SECURE PASSWORD" class="${style}">
-                    <button onclick="handleSignUp()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase hover:bg-white transition btn-glow">Establish Identity</button>`;
+                content.innerHTML = `<h2 class="text-xl font-heading font-bold mb-8 uppercase italic text-primary">Establish ID</h2><input id="email" type="email" placeholder="EMAIL" class="${style}"><input id="phone" type="text" placeholder="WHATSAPP NO" class="${style}"><input id="pass" type="password" placeholder="PASSWORD" class="${style}"><button onclick="handleSignUp()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase">Create ID</button>`;
             }
         }
 
@@ -200,35 +238,15 @@
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const pass = document.getElementById('pass').value;
-
-            if (!email || !phone || !pass) {
-                alert("CRITICAL ERROR: All fields required for ID Establishment.");
-                return;
-            }
-
-            const { data, error } = await _supabase.auth.signUp({ 
-                email: email, 
-                password: pass,
-                options: { data: { phone: phone } }
-            });
-
-            if (error) alert(error.message); 
-            else { 
-                alert("ID RECORDED. Check email for secure activation link."); 
-                toggleAuth(); 
-            }
+            const { data, error } = await _supabase.auth.signUp({ email, password: pass, options: { data: { phone } } });
+            if (error) alert(error.message); else { alert("Verification link sent."); toggleAuth(); }
         }
 
         async function handleSignIn() {
             const email = document.getElementById('email').value;
             const pass = document.getElementById('pass').value;
-
             const { data, error } = await _supabase.auth.signInWithPassword({ email, password: pass });
-            if (error) alert(error.message); 
-            else { 
-                updateUI(data.user); 
-                toggleAuth(); 
-            }
+            if (error) alert(error.message); else { updateUI(data.user); toggleAuth(); }
         }
 
         async function handleSignOut() { await _supabase.auth.signOut(); window.location.reload(); }
