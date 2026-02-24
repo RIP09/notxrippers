@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOT x RIPPERS | Official Esports Portal</title>
+    <title>NOT x RIPPERS | Esports Operations</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
@@ -12,77 +12,58 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { primary: '#00D1FF', accent: '#FF0055', dark: '#020202', panel: '#0A0A0A' },
+                    colors: { primary: '#00D1FF', dark: '#020202', panel: '#0A0A0A' },
                     fontFamily: { heading: ['Syncopate', 'sans-serif'], body: ['Space Grotesk', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        body { 
-            background-color: #020202; color: white; scroll-behavior: smooth;
-            background-image: radial-gradient(circle at 2px 2px, rgba(0, 209, 255, 0.05) 1px, transparent 0);
-            background-size: 40px 40px;
-        }
+        body { background-color: #020202; color: white; scroll-behavior: smooth; }
         .glass { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
-        .neon-border { border: 1px solid rgba(0, 209, 255, 0.3); box-shadow: 0 0 20px rgba(0, 209, 255, 0.1); }
         .neon-text { text-shadow: 0 0 10px rgba(0, 209, 255, 0.5); }
-        .skew-btn { transform: skew(-10deg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
-        .skew-btn:hover { transform: skew(-10deg) scale(1.05); box-shadow: 0 0 25px rgba(0, 209, 255, 0.4); }
+        .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; display: inline-block; cursor: pointer; }
+        .skew-btn:hover { transform: skew(-10deg) scale(1.05); box-shadow: 0 0 20px rgba(0, 209, 255, 0.4); }
         .skew-btn span { transform: skew(10deg); display: inline-block; }
-        .scanline { width: 100%; height: 2px; background: rgba(0, 209, 255, 0.3); position: absolute; animation: scan 3s linear infinite; }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #020202; }
-        ::-webkit-scrollbar-thumb { background: #00D1FF; }
+        .scanline { width: 100%; height: 2px; background: rgba(0, 209, 255, 0.2); position: absolute; animation: scan 3s linear infinite; top: 0; }
+        @keyframes scan { 100% { top: 100%; } }
     </style>
 </head>
 <body class="font-body overflow-x-hidden">
 
     <nav class="fixed w-full z-[100] px-6 py-4 flex justify-between items-center glass border-b border-white/10">
         <div class="flex items-center gap-4">
-            <img src="./NxREsportsLogo.jpg" alt="NxR" class="h-10 w-auto border-r-2 border-primary pr-4" onerror="this.src='https://via.placeholder.com/40'">
             <span class="font-heading font-bold text-lg italic neon-text tracking-tighter uppercase">NOT X<span class="text-primary"> RIPPERS</span></span>
         </div>
         <div class="hidden lg:flex gap-8 text-[10px] font-bold uppercase tracking-[0.3em]">
-            <a href="#about" class="hover:text-primary transition">About</a>
-            <a href="#compliance" class="hover:text-primary transition text-primary">Compliance</a>
-            <a href="#staff" class="hover:text-primary transition">Staff</a>
-            <a href="#join" class="hover:text-primary transition">Recruitment</a>
-            <div id="auth-ui-desktop" class="border-l border-white/20 pl-6 flex gap-4"></div>
+            <a href="#compliance" class="text-primary">Compliance</a>
+            <a href="#staff">Command</a>
+            <a href="#join">Recruitment</a>
         </div>
-        <button onclick="toggleMenu()" class="lg:hidden text-primary">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-dark/95 z-[90] flex flex-col items-center justify-center gap-8 hidden">
-        <a href="#about" onclick="toggleMenu()" class="text-2xl font-heading italic">ABOUT</a>
-        <a href="#compliance" onclick="toggleMenu()" class="text-2xl font-heading italic text-primary">COMPLIANCE</a>
-        <a href="#staff" onclick="toggleMenu()" class="text-2xl font-heading italic">STAFF</a>
-        <a href="#join" onclick="toggleMenu()" class="text-2xl font-heading italic">JOIN</a>
-        <div id="auth-ui-mobile" class="mt-8"></div>
-    </div>
-
-    <section class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070')] bg-cover bg-center opacity-10"></div>
+    <section class="h-[70vh] flex flex-col items-center justify-center text-center relative px-4">
         <div class="z-10">
-            <div class="inline-block px-4 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.5em] mb-8 skew-x-[-15deg]">INDIA COMPLIANT ESTD 2026</div>
-            <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 tracking-tighter uppercase leading-none">RIP THE<br><span class="text-primary">ARENA</span></h1>
-            <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase inline-block mt-8"><span>Initiate Recruitment</span></a>
+            <div class="inline-block px-4 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.5em] mb-6">ESTABLISHED 2026</div>
+            <h1 class="text-5xl md:text-8xl font-heading font-bold italic mb-6 tracking-tighter uppercase leading-none">THE NEW<br><span class="text-primary">STANDARD</span></h1>
         </div>
     </section>
 
-    <section id="compliance" class="py-32 px-6 bg-panel relative overflow-hidden">
+    <section id="compliance" class="py-24 px-6 bg-panel relative">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="relative">
-                <div class="absolute -top-10 -left-10 text-primary/10 font-heading text-9xl">KYC</div>
-                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6 leading-tight">Regulatory<br><span class="text-primary">Protocol</span></h2>
+            
+            <div>
+                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">
+                    Regulatory <span class="text-primary">Protocol</span>
+                </h2>
                 <p class="text-gray-400 text-lg leading-relaxed mb-8 italic">
-                    "According to latest Gaming Rules by Indian Govt since 2025. We are supporting & respecting Govt rules and according to that we are implementing the esports arena."
+                    In compliance with the <strong>Gazette of India [2025]</strong>, our operations ensure strict user verification. 
+                    We maintain transparency in esports and protect all operatives from unregulated gaming risks.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="./PROMOTION_AND_REGULATIONS_OF_ONLINE_GAMING_AND_RULES.pdf" download class="skew-btn border border-primary text-primary px-6 py-3 text-[10px] font-bold uppercase"><span>Download Official Act</span></a>
+                    <a href="./online-gaming-rules-2025.pdf" target="_blank" class="skew-btn border border-primary text-primary px-8 py-4 text-[10px] font-bold uppercase hover:bg-primary hover:text-black transition-all">
+                        <span>View Official Act [PDF]</span>
+                    </a>
                 </div>
             </div>
 
@@ -90,178 +71,79 @@
                 <div class="scanline"></div>
                 <div class="flex items-center gap-4 mb-8">
                     <div class="w-3 h-3 bg-primary animate-pulse"></div>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Operative Identity Verification</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em]">Identity Authentication</span>
                 </div>
                 
                 <div id="kyc-container" class="space-y-6">
                     <div>
-                        <label class="block text-[9px] text-gray-500 uppercase tracking-widest mb-2">Legal Verification Method</label>
+                        <label class="block text-[8px] text-gray-500 uppercase tracking-[0.3em] mb-2">Select Credential Type</label>
                         <select id="kyc-type" class="w-full bg-white/5 border border-white/10 p-4 text-xs text-white outline-none focus:border-primary">
-                            <option value="aadhaar">Aadhaar (OTP Based)</option>
+                            <option value="aadhaar">Aadhaar (Electronic Verification)</option>
                             <option value="pan">PAN Card</option>
                             <option value="passport">Passport</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-[9px] text-gray-500 uppercase tracking-widest mb-2">ID Number / Document Token</label>
-                        <input type="text" placeholder="XXXX-XXXX-XXXX" class="w-full bg-white/5 border border-white/10 p-4 text-xs text-white outline-none focus:border-primary">
+                        <label class="block text-[8px] text-gray-500 uppercase tracking-[0.3em] mb-2">Document Identifier</label>
+                        <input type="text" id="kyc-id" placeholder="XXXX-XXXX-XXXX" class="w-full bg-white/5 border border-white/10 p-4 text-xs text-white outline-none focus:border-primary uppercase">
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 p-3 bg-white/5">
                         <input type="checkbox" id="age-check" class="w-4 h-4 accent-primary">
-                        <label for="age-check" class="text-[10px] text-gray-400 uppercase">I confirm I am above 16 years under the consent of guardian/parents and above 18 without consent of guardian/parents as per Indian Law</label>
+                        <label for="age-check" class="text-[9px] text-gray-400 uppercase leading-tight">I certify I am 16+ under the consent of legal Guardian/parents and 18+ and acknowledge the Regulatory Terms.</label>
                     </div>
-                    <button onclick="simulateVerification()" class="w-full bg-primary text-black py-4 font-black text-[10px] uppercase skew-btn"><span>Execute Verification</span></button>
+                    <button onclick="handleVerification()" class="w-full bg-primary text-black py-4 font-black text-[10px] uppercase skew-btn">
+                        <span>Execute Verification</span>
+                    </button>
                 </div>
-                <div id="kyc-success" class="hidden text-center py-8">
-                    <div class="text-primary text-4xl mb-4">✓</div>
-                    <p class="font-heading italic text-sm">IDENTITY SECURED</p>
-                    <p class="text-[9px] text-gray-500 mt-2 uppercase">Compliant with 2025 Regulations</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="staff" class="py-32 px-6">
-        <h2 class="text-4xl font-heading font-bold uppercase italic text-center mb-20">Command <span class="text-primary">Staff</span></h2>
-        <div id="staff-grid" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-    </section>
-
-    <section id="profile-section" class="py-32 px-6 hidden">
-        <div class="max-w-4xl mx-auto glass p-12 border-l-4 border-primary">
-            <h2 class="text-3xl font-heading font-bold italic uppercase tracking-tighter mb-4">Operative <span class="text-primary">Profile</span></h2>
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <div class="w-32 h-32 bg-primary/20 border border-primary flex items-center justify-center text-primary text-4xl">NxR</div>
-                <div>
-                    <p id="profile-email" class="text-xl font-bold tracking-widest uppercase mb-2"></p>
-                    <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em] mb-6 italic">Status: Verified Member</p>
-                    <button onclick="handleDeleteAccount()" class="text-[10px] text-red-500 font-bold uppercase border-b border-red-500/30 hover:text-red-400">Request Data Erasure</button>
+                <div id="kyc-success" class="hidden text-center py-12">
+                    <div class="text-primary text-5xl mb-4">✓</div>
+                    <p class="font-heading italic text-sm tracking-widest">VERIFICATION COMPLETE</p>
+                    <p class="text-[9px] text-gray-500 mt-2 uppercase tracking-widest">Compliant with Section 12 of 2025 Act</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="join" class="py-32 px-6">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-heading font-bold uppercase italic text-center mb-12">Recruitment <span class="text-primary">Portal</span></h2>
-            <div class="neon-border p-1 bg-dark min-h-[900px]">
-                <iframe id="recruitment-form" src="" width="100%" height="900" frameborder="0"></iframe>
+    <section id="staff" class="py-24 px-6 text-center">
+        <h2 class="text-4xl font-heading font-bold uppercase italic mb-16">Command <span class="text-primary">Staff</span></h2>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass p-8 border-b-2 border-primary">
+                <div class="text-primary text-[10px] font-bold uppercase mb-2">CEO / Founder</div>
+                <div class="text-2xl font-heading italic uppercase">RIPPER</div>
+            </div>
+            <div class="glass p-8 border-b-2 border-primary">
+                <div class="text-primary text-[10px] font-bold uppercase mb-2">Lead Strategist</div>
+                <div class="text-2xl font-heading italic uppercase">VENOM</div>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 border-t border-white/10 bg-panel text-center">
-        <div class="font-heading font-bold text-lg italic neon-text mb-8 uppercase">NOTX<span class="text-primary">RIPPERS</span></div>
-        <p class="text-gray-600 text-[10px] tracking-[0.8em] uppercase mb-10">Professional Esports Infrastructure</p>
-        <div id="visitor-stats" class="text-[9px] text-primary/60 font-mono">[ ANALYZING TRAFFIC... ]</div>
-        <p class="mt-8 text-gray-500 text-[9px] uppercase tracking-widest leading-loose">
-            © 2026 NOTxRIPPERS. All Rights Reserved.<br>
-            Compliant with Ministry of Electronics and Information Technology (MeitY) Rules.
-        </p>
+    <section id="join" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto glass p-1">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true" width="100%" height="800" frameborder="0">Loading Recruitment Form...</iframe>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/10 bg-panel text-center">
+        <p class="text-gray-500 text-[9px] uppercase tracking-[0.5em]">© 2026 NOTxRIPPERS Operations | Digital Integrity Secured</p>
     </footer>
 
-    <div id="auth-modal" class="fixed inset-0 z-[200] bg-dark/98 backdrop-blur-2xl hidden flex items-center justify-center p-4">
-        <div class="glass max-w-md w-full p-12 relative border border-white/10">
-            <button onclick="toggleAuth()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-3xl">&times;</button>
-            <div id="auth-content" class="text-center"></div>
-        </div>
-    </div>
-
     <script>
-        const SUPABASE_URL = 'https://pnplwsvhxqxzwoweiyfh.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBucGx3c3ZoeHF4endvd2VpeWZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MjI3MTUsImV4cCI6MjA4NzM5ODcxNX0.JsnbizSjuk_06Ds6higCTACAf08TosaIZfMK5_hZQTk'; 
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        const DB = {
-            form: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true",
-            staff: [
-                { name: "RIPPER", role: "FOUNDER & CEO", bio: "Visionary lead of NxR operations." },
-                { name: "VENOM", role: "CO-FOUNDER", bio: "Tactical head and roster management." },
-                { name: "GHOST", role: "CHIEF STRATEGIST", bio: "Overseeing competitive integrity." }
-            ]
-        };
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        function simulateVerification() {
+        function handleVerification() {
+            const id = document.getElementById('kyc-id').value;
             const check = document.getElementById('age-check').checked;
-            if(!check) return alert("You must be 18+ to enter the arena.");
-            document.getElementById('kyc-container').classList.add('hidden');
-            document.getElementById('kyc-success').classList.remove('hidden');
-        }
-
-        // Initialize Data
-        document.getElementById('recruitment-form').src = DB.form;
-        const staffContainer = document.getElementById('staff-grid');
-        DB.staff.forEach(s => {
-            staffContainer.innerHTML += `
-                <div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition-all duration-500 group">
-                    <div class="text-primary font-bold text-[9px] mb-4 tracking-[0.4em]">${s.role}</div>
-                    <h3 class="text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3>
-                    <p class="text-gray-500 text-xs leading-relaxed italic border-t border-white/5 pt-4">${s.bio}</p>
-                </div>`;
-        });
-
-        // Supabase Auth Logic
-        async function init() {
-            const { data: { session } } = await _supabase.auth.getSession();
-            updateUI(session?.user);
-            trackVisitor();
-        }
-        init();
-
-        function updateUI(user) {
-            const desktop = document.getElementById('auth-ui-desktop');
-            const mobile = document.getElementById('auth-ui-mobile');
-            const profile = document.getElementById('profile-section');
             
-            const content = user 
-                ? `<button onclick="handleSignOut()" class="skew-btn bg-red-500/10 border border-red-500 text-red-500 px-6 py-2 text-[9px] font-bold uppercase"><span>Sign Out</span></button>`
-                : `<button onclick="toggleAuth('login')" class="text-[9px] font-bold uppercase hover:text-primary transition mr-6">Login</button><button onclick="toggleAuth('register')" class="skew-btn bg-primary text-black px-6 py-2 text-[9px] font-black uppercase"><span>Join Us</span></button>`;
+            if(!id) return alert("Please enter a valid Identification Number.");
+            if(!check) return alert("Age verification is mandatory under 2025 Rules.");
             
-            desktop.innerHTML = content;
-            mobile.innerHTML = content;
-            if(user) {
-                profile.classList.remove('hidden');
-                document.getElementById('profile-email').innerText = user.email;
-            } else {
-                profile.classList.add('hidden');
-            }
-        }
-
-        function toggleAuth(mode) {
-            const modal = document.getElementById('auth-modal');
-            const content = document.getElementById('auth-content');
-            if(!mode) return modal.classList.add('hidden');
-            modal.classList.remove('hidden');
-            const inputStyle = "w-full bg-white/5 border border-white/10 p-5 mb-5 text-sm text-white outline-none focus:border-primary";
+            // Simulating connection to Government API
+            document.getElementById('kyc-container').innerHTML = "<div class='text-center py-10 text-primary animate-pulse'>CONNECTING TO GATEWAY...</div>";
             
-            content.innerHTML = `<h2 class="text-2xl font-heading font-bold mb-8 uppercase italic">${mode}</h2>
-                <input id="email" type="email" placeholder="EMAIL" class="${inputStyle}">
-                <input id="pass" type="password" placeholder="KEY" class="${inputStyle}">
-                <button onclick="${mode === 'login' ? 'handleSignIn' : 'handleSignUp'}()" class="w-full bg-primary text-black py-4 font-black text-xs uppercase skew-btn"><span>Execute ${mode}</span></button>`;
-        }
-
-        async function handleSignUp() {
-            const { error } = await _supabase.auth.signUp({ email: document.getElementById('email').value, password: document.getElementById('pass').value });
-            if (error) alert(error.message); else { alert("Verification link sent."); toggleAuth(); }
-        }
-
-        async function handleSignIn() {
-            const { data, error } = await _supabase.auth.signInWithPassword({ email: document.getElementById('email').value, password: document.getElementById('pass').value });
-            if (error) alert(error.message); else { updateUI(data.user); toggleAuth(); }
-        }
-
-        async function handleSignOut() { await _supabase.auth.signOut(); window.location.reload(); }
-
-        async function trackVisitor() {
-            try {
-                const res = await fetch('https://api.counterapi.dev/v1/notxrippers_modern/visits/up');
-                const data = await res.json();
-                document.getElementById('visitor-stats').innerText = `GLOBAL OPERATIVES CONNECTED: ${data.count}`;
-            } catch(e) { document.getElementById('visitor-stats').innerText = `ENCRYPTED CONNECTION ESTABLISHED`; }
+            setTimeout(() => {
+                document.getElementById('kyc-container').classList.add('hidden');
+                document.getElementById('kyc-success').classList.remove('hidden');
+            }, 2000);
         }
     </script>
 </body>
