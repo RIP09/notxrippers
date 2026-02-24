@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOT x RIPPERS | Professional Esports Organization</title>
+    
+    <link rel="icon" type="image/jpeg" href="NxREsportsLogo.jpg">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     
     <script>
+        // Initialize EmailJS with your Public Key
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // REPLACE WITH YOUR PUBLIC KEY
+        })();
+
         tailwind.config = {
             theme: {
                 extend: {
@@ -23,22 +32,28 @@
             background-color: #020202; 
             color: white; 
             scroll-behavior: smooth;
-            background-image: radial-gradient(circle at 2px 2px, rgba(0, 209, 255, 0.1) 1px, transparent 0);
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 209, 255, 0.07) 1px, transparent 0);
             background-size: 40px 40px;
         }
-        .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
-        .neon-border { border: 1px solid rgba(0, 209, 255, 0.3); box-shadow: 0 0 15px rgba(0, 209, 255, 0.1); }
+        .glass { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+        .neon-border { border: 1px solid rgba(0, 209, 255, 0.3); box-shadow: 0 0 20px rgba(0, 209, 255, 0.1); }
         .neon-text { text-shadow: 0 0 10px rgba(0, 209, 255, 0.5); }
         .hidden { display: none; }
-        .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; display: inline-block; }
-        .skew-btn:hover { transform: skew(-10deg) scale(1.05); box-shadow: 0 0 20px rgba(0, 209, 255, 0.4); }
+        .skew-btn { transform: skew(-10deg); transition: all 0.3s ease; display: inline-block; cursor: pointer; }
+        .skew-btn:hover { transform: skew(-10deg) scale(1.05); box-shadow: 0 0 25px rgba(0, 209, 255, 0.4); }
         .skew-btn span { transform: skew(10deg); display: inline-block; }
         
-        input, textarea { background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: white !important; }
-        input:focus, textarea:focus { border-color: #00D1FF !important; outline: none; background: rgba(0, 209, 255, 0.05) !important; }
-
-        .fade-in { animation: fadeIn 1.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        input, textarea { 
+            background: rgba(255,255,255,0.03) !important; 
+            border: 1px solid rgba(255,255,255,0.1) !important; 
+            color: white !important; 
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus { 
+            border-color: #00D1FF !important; 
+            outline: none; 
+            background: rgba(0, 209, 255, 0.05) !important; 
+        }
     </style>
 </head>
 <body class="font-body overflow-x-hidden">
@@ -52,13 +67,9 @@
             logo: "NxREsportsLogo.jpg",
             form: "https://docs.google.com/forms/d/e/1FAIpQLSfLVfsT0A30hKUdPg_hkPms88vNBxC6GiQchLGl48yd57KThw/viewform?embedded=true",
             staff: [
-                { name: "RIPPER", role: "FOUNDER & CEO", bio: "The tactical architect defining the NxR legacy." },
-                { name: "VENOM", role: "CO-FOUNDER", bio: "Head of roster dynamics and competitive strategy." },
-                { name: "GHOST", role: "CHIEF STRATEGIST", bio: "In charge of meta-analysis and hardware optimization." }
-            ],
-            news: [
-                { title: "SYSTEMS ONLINE", date: "MAR 2026", desc: "Official web infrastructure deployed for NOT x RIPPERS." },
-                { title: "RECRUITMENT WAVE", date: "FEB 2026", desc: "Accepting applications for the tactical division." }
+                { name: "RIPPER", role: "FOUNDER & CEO", bio: "Tactical architect of the NxR legacy." },
+                { name: "VENOM", role: "CO-FOUNDER", bio: "Lead of roster dynamics and strategy." },
+                { name: "GHOST", role: "CHIEF STRATEGIST", bio: "Lead of meta-evolution." }
             ]
         };
     </script>
@@ -72,90 +83,64 @@
             <a href="#about" class="hover:text-primary transition">Strategy</a>
             <a href="#staff" class="hover:text-primary transition">Leadership</a>
             <a href="#contact" class="hover:text-primary transition">Contact</a>
-            <a href="#join" class="hover:text-primary transition">Recruitment</a>
+            <a href="#join" class="hover:text-primary transition">Join</a>
         </div>
         <div id="auth-ui" class="flex gap-4"></div>
     </nav>
 
-    <section class="h-screen flex flex-col items-center justify-center text-center px-4">
-        <div class="fade-in">
-            <div class="inline-block px-4 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">ESTD 2026</div>
-            <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter leading-none">RIP THE <br><span class="text-primary">ARENA</span></h1>
-            <p class="text-gray-500 max-w-xl mx-auto mb-10 text-xs tracking-[0.4em] uppercase font-light">Evolution through mechanical precision.</p>
-            <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase"><span>Join The Ranks</span></a>
-        </div>
+    <section class="h-screen flex flex-col items-center justify-center text-center px-4 relative">
+        <div class="inline-block px-4 py-1 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-[0.4em] mb-6 skew-x-[-15deg]">ESTD 2026</div>
+        <h1 class="text-6xl md:text-9xl font-heading font-bold italic mb-6 uppercase tracking-tighter leading-none">RIP THE <br><span class="text-primary">ARENA</span></h1>
+        <a href="#join" class="skew-btn bg-primary text-black px-12 py-5 font-black text-xs uppercase mt-8"><span>Initialize Recruitment</span></a>
     </section>
 
     <section id="about" class="py-32 px-6 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">Operations</h2>
-                <p class="text-gray-400 leading-loose text-lg font-light mb-10">
-                    Founded in 2026, <span class="text-white font-bold tracking-widest uppercase">NOTxRIPPERS</span> is a high-performance esports infrastructure.
-                </p>
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="border-t border-white/10 pt-4"><h4 class="text-primary text-[10px] font-bold uppercase tracking-widest">Mission</h4><p class="text-xs text-gray-500 italic mt-2">World dominance.</p></div>
-                    <div class="border-t border-white/10 pt-4"><h4 class="text-primary text-[10px] font-bold uppercase tracking-widest">Vision</h4><p class="text-xs text-gray-500 italic mt-2">Professionalism redefined.</p></div>
-                </div>
-            </div>
-            <div class="glass p-10 border-t-2 border-primary/40 relative">
-                <div class="absolute -top-4 -right-4 bg-primary text-black font-black p-2 text-[10px] skew-x-[-15deg]">CORE VALUES</div>
-                <ul class="space-y-4 text-sm tracking-widest uppercase">
-                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-primary"></span> Integrity First</li>
-                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-primary"></span> Absolute Precision</li>
-                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-primary"></span> Tactical Evolution</li>
-                </ul>
-            </div>
-        </div>
+        <h2 class="text-4xl font-heading font-bold uppercase italic mb-8 border-l-4 border-primary pl-6">Operations</h2>
+        <p class="text-gray-400 leading-loose text-lg font-light mb-8 max-w-2xl">
+            NOTxRIPPERS (NxR) is a high-performance infrastructure designed to cultivate elite competitive talent through professional discipline.
+        </p>
     </section>
 
-    <section id="news" class="py-32 bg-panel">
+    <section id="staff" class="py-32 bg-panel">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-heading font-bold uppercase italic mb-16 text-center tracking-tighter">Live <span class="text-primary">Intel</span></h2>
-            <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-        </div>
-    </section>
-
-    <section id="staff" class="py-32 px-6">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-4xl font-heading font-bold uppercase italic mb-16 tracking-tighter">Strategic <span class="text-primary">Leadership</span></h2>
+            <h2 class="text-4xl font-heading font-bold uppercase italic mb-16 tracking-tighter text-center">Leadership <span class="text-primary">Staff</span></h2>
             <div id="staff-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left"></div>
         </div>
     </section>
 
-    <section id="contact" class="py-32 bg-panel border-y border-white/5">
-        <div class="max-w-4xl mx-auto px-6">
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-heading font-bold uppercase italic tracking-tighter">Contact <span class="text-primary">Command</span></h2>
-                <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em] mt-4 font-light">Secure communications link to NOTxRIPPERS HQ</p>
+                <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em] mt-4 font-light">Secure encrypted transmission to notxrippers@gmail.com</p>
             </div>
             
-            <div class="glass p-1 border-primary/20 neon-border">
-                <form action="https://formspree.io/f/notxrippers@gmail.com" method="POST" class="p-8 md:p-12 space-y-6">
+            <div class="glass p-1 neon-border">
+                <form id="contact-form" class="p-8 md:p-12 space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Full Name</label>
-                            <input type="text" name="name" placeholder="OPERATOR NAME" class="w-full p-4 text-xs uppercase" required>
+                            <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Identity (Name)</label>
+                            <input type="text" name="from_name" id="from_name" placeholder="OPERATOR NAME" class="w-full p-4 text-xs uppercase" required>
                         </div>
                         <div>
-                            <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">WhatsApp / Phone No.</label>
-                            <input type="text" name="whatsapp" placeholder="+1 234 567 890" class="w-full p-4 text-xs" required>
+                            <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">WhatsApp / Contact</label>
+                            <input type="text" name="whatsapp" id="whatsapp" placeholder="+00 000 000 000" class="w-full p-4 text-xs" required>
                         </div>
                     </div>
                     
                     <div>
-                        <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Official Email Address</label>
-                        <input type="email" name="email" placeholder="NAME@GMAIL.COM" class="w-full p-4 text-xs" required>
+                        <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Return Email Address</label>
+                        <input type="email" name="from_email" id="from_email" placeholder="YOUR@EMAIL.COM" class="w-full p-4 text-xs" required>
                     </div>
                     
                     <div>
-                        <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Encrypted Message</label>
-                        <textarea name="message" rows="5" placeholder="TYPE YOUR MESSAGE HERE..." class="w-full p-4 text-xs uppercase" required></textarea>
+                        <label class="text-[10px] font-bold text-primary uppercase tracking-widest mb-2 block">Detailed Transmission</label>
+                        <textarea name="message" id="message" rows="5" placeholder="ENTER YOUR MESSAGE..." class="w-full p-4 text-xs uppercase" required></textarea>
                     </div>
                     
                     <div class="text-center pt-4">
                         <button type="submit" class="skew-btn bg-primary text-black px-16 py-5 font-black text-xs uppercase">
-                            <span>Initialize Transmission</span>
+                            <span>Transmit Data</span>
                         </button>
                     </div>
                 </form>
@@ -173,10 +158,12 @@
 
     <section id="join" class="py-32 px-6 max-w-5xl mx-auto">
         <h2 class="text-4xl font-heading font-bold uppercase italic mb-12 text-center">Recruitment <span class="text-primary">Portal</span></h2>
-        <div class="neon-border p-1 bg-dark"><iframe id="recruitment-form" src="" width="100%" height="800" frameborder="0"></iframe></div>
+        <div class="neon-border p-1 bg-dark">
+            <iframe id="recruitment-form" src="" width="100%" height="800" frameborder="0"></iframe>
+        </div>
     </section>
 
-    <footer class="py-12 border-t border-white/5 text-center">
+    <footer class="py-16 border-t border-white/5 text-center">
         <span class="font-heading font-bold text-xs tracking-tighter uppercase italic">NOTX<span class="text-primary">RIPPERS</span></span>
         <p class="text-gray-600 text-[10px] uppercase tracking-[0.5em] mt-4 font-light">Copyright &copy; 2026 NOTxRIPPERS. All Rights Reserved.</p>
     </footer>
@@ -189,18 +176,37 @@
     </div>
 
     <script>
-        document.getElementById('recruitment-form').src = DB.form;
-        
-        const newsContainer = document.getElementById('news-grid');
-        DB.news.forEach(n => {
-            newsContainer.innerHTML += `<div class="glass p-8 hover:border-white/20 transition"><div class="text-[9px] text-primary mb-2 font-bold uppercase">${n.date}</div><h3 class="text-xl font-heading font-bold italic uppercase mb-2">${n.title}</h3><p class="text-gray-500 text-xs italic font-light">${n.desc}</p></div>`;
+        // FORM SUBMISSION LOGIC (EmailJS)
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Show loading state
+            const btn = this.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>Transmitting...</span>';
+            btn.style.opacity = '0.5';
+
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    alert('TRANSMISSION SUCCESSFUL. HQ will respond shortly.');
+                    btn.innerHTML = originalText;
+                    btn.style.opacity = '1';
+                    document.getElementById('contact-form').reset();
+                }, function(error) {
+                    alert('TRANSMISSION FAILED: ' + JSON.stringify(error));
+                    btn.innerHTML = originalText;
+                    btn.style.opacity = '1';
+                });
         });
 
+        // UI & Staff Injection
+        document.getElementById('recruitment-form').src = DB.form;
         const staffContainer = document.getElementById('staff-grid');
         DB.staff.forEach(s => {
             staffContainer.innerHTML += `<div class="glass p-8 border-b-2 border-white/5 hover:border-primary transition group"><div class="text-primary font-bold text-[9px] mb-2 uppercase tracking-widest">${s.role}</div><h3 class="text-2xl font-heading font-bold italic mb-4 uppercase group-hover:neon-text transition">${s.name}</h3><p class="text-gray-500 text-xs italic font-light">${s.bio}</p></div>`;
         });
 
+        // Supabase Auth
         async function init() {
             const { data: { session } } = await _supabase.auth.getSession();
             updateUI(session?.user);
@@ -214,7 +220,7 @@
                 authUI.innerHTML = `<button onclick="handleSignOut()" class="skew-btn border border-red-500 text-red-500 px-4 py-1 text-[9px] font-bold uppercase hover:bg-red-500 hover:text-white transition"><span>Logoff</span></button>`;
                 profileSec.classList.remove('hidden');
                 document.getElementById('profile-email').innerText = `EMAIL: ${user.email}`;
-                document.getElementById('profile-phone').innerText = `WA: ${user.user_metadata?.phone || "PENDING ID"}`;
+                document.getElementById('profile-phone').innerText = `WA: ${user.user_metadata?.phone || "NO DATA"}`;
             } else {
                 authUI.innerHTML = `<button onclick="toggleAuth('login')" class="text-[10px] font-bold uppercase hover:text-primary transition mr-4">Login</button><button onclick="toggleAuth('register')" class="skew-btn bg-primary text-black px-6 py-1 text-[10px] font-black uppercase"><span>Register</span></button>`;
                 profileSec.classList.add('hidden');
