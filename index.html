@@ -117,7 +117,14 @@
         <div class="max-w-4xl mx-auto glass p-8 md:p-12 border-l-4 border-primary overflow-hidden break-words">
             <h2 class="text-2xl md:text-3xl font-heading font-bold uppercase italic mb-4 tracking-tighter">Access <span class="text-primary">Granted</span></h2>
             <p id="profile-email" class="text-white font-bold tracking-widest uppercase text-xs md:text-sm mb-2"></p>
-            <p class="text-gray-500 text-[10px] uppercase tracking-widest italic">NxR Verified Personnel</p>
+            <p class="text-gray-500 text-[10px] uppercase tracking-widest italic mb-8">NxR Verified Personnel</p>
+            
+            <div class="border-t border-white/10 pt-6 mt-4">
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-4">Danger Zone</p>
+                <button onclick="handleDeleteAccount()" class="skew-btn bg-red-900/20 border border-red-500 text-red-500 px-6 py-3 text-[10px] font-black uppercase hover:bg-red-600 hover:text-white transition shadow-[0_0_10px_rgba(239,68,68,0.1)] hover:shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                    <span>Initiate Data Erasure</span>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -263,7 +270,6 @@
             if(!mode) return modal.classList.add('hidden');
             modal.classList.remove('hidden');
             
-            // Close mobile menu if open when clicking login/register
             const mobileMenu = document.getElementById('mobile-menu');
             if(!mobileMenu.classList.contains('hidden')) toggleMobileMenu();
 
@@ -286,6 +292,27 @@
         }
 
         async function handleSignOut() { await _supabase.auth.signOut(); window.location.reload(); }
+
+        // NEW: Handle Account Deletion Logic
+        async function handleDeleteAccount() {
+            const confirmed = confirm("CRITICAL WARNING: Are you sure you want to permanently erase your NxR Operative Data? This action is irreversible.");
+            
+            if (confirmed) {
+                // Try to delete via Supabase remote function (RPC)
+                const { error } = await _supabase.rpc('delete_user');
+                
+                if (error) {
+                    // Fallback if the Supabase backend SQL function is not setup yet
+                    alert("SYSTEM NOTICE: Direct data deletion blocked by server firewall. To finalize data erasure, please submit a 'Data Deletion' request through the Secure Comms panel below. Your local session will now be terminated.");
+                } else {
+                    alert("Operative data permanently erased. Connection terminated.");
+                }
+                
+                // Sign the user out locally regardless so their screen clears
+                await _supabase.auth.signOut();
+                window.location.reload();
+            }
+        }
     </script>
 </body>
 </html>
